@@ -1,0 +1,14 @@
+Leer 
+Como actualizar de la version XVM Terminal 3.08 
+a la version XVM Terminal 4.24:
+
+Instale el archivo XVM terminal.msi siguiendo los pasos tal cual se
+los vaya indicando el programa.
+Una vez instalado el programa, vaya a la ruta en donde este se instalo, 
+usualmente: C:\Archivos de Programa\Virtualtec\XVM_terminal\
+Alli dentro encontrara un ejecutable XVM Terminal.exe
+Eliminelo y coloque dentro de esa carpeta el archivo ejecutable comprimido dentro
+del archivo XVM_Terminal 4_24.rar
+
+Al ejecutar el programa deberia decir arriba de la ventana del mismo
+la version 4.24

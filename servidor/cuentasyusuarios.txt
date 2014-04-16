@@ -1,0 +1,31 @@
+Wallets
+=======
+Michel Poignant
+ID: 08316484
+Password: 6VPAFS
+PIN: 520796
+AR$
+
+Walter:
+ID: 08587726
+Password: VHBEAJ
+PIN: 539482
+USD$
+
+Merchants:
+=========
+
+URL: https://merchant.paytoo.info/merchants
+User: warneson@gmail.com
+Password : qazwsx12
+Password: 1234qwer
+Distrib:
+=======
+URL: https://admin.paytoo.inco
+User: jlopez.mail@gmail.com
+Password: devpass
+
+POS:
+===
+joelopez:pospass@https://pos.paytoo.info
+

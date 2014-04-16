@@ -1,0 +1,45 @@
+public static bool validateCheckSum(string text)
+            {
+
+                string data, message_checksum, calculated_checksum;
+
+                string[] stringArray = text.Split('*');
+
+                if (stringArray.Length != 2)
+                {
+                    return false;
+                }
+
+                data = stringArray[0]; // La parte de datos del mensaje
+                if (stringArray[1].Length < 3 || stringArray[1].Substring(2, 1) != "<")
+                    return false;
+
+                message_checksum = stringArray[1].Substring(0, 2); // Los Caracteres del check
+
+                calculated_checksum = calculateChecksum(data);
+
+                return calculated_checksum == message_checksum;
+
+            }
+
+ public static string calculateChecksum(string data)
+            {
+                int r;
+
+                int calc = 0;
+
+                byte caracter;
+
+                string calculated_checksum;
+
+                for (r = 0; r < data.Length; r++)
+                {
+                    if (data[r] == '*')
+                        break;
+                    caracter = (byte)data[r];
+                    calc = calc ^ (byte)caracter;
+                }
+                calculated_checksum = calc.ToString("X");
+                return calculated_checksum;
+
+            }

@@ -1,0 +1,56 @@
+<html>
+<meta http-equiv="refresh" content="5">
+<?php
+echo "<h1>Hora actual: ".date("Y-m-d H:i")."</h1>";
+include "db.php";
+# HelloClient.php
+# Copyright (c) 2005 by Dr. Herong Yang
+#
+   $client = new SoapClient(null, array(
+	  'encoding' => "UTF-8",
+      'location' => "http://soap.localhost/server.php",
+      'uri'      => "urn://www.herong.home/re",
+	  'exception' => 1,
+      'trace'    => 1 ));
+
+
+	/*
+	$autos=$client->getAutos();
+
+	echo "<pre>";
+	foreach($autos as $p){
+		var_dump($p);
+		echo "<br>";
+		echo "<br>";
+	}
+	*/
+
+
+
+
+	/*
+	$return = $client->__soapCall("hello",array("world"));
+	echo $return;
+*/
+	//echo $client->__soapCall("getAutos",array());
+
+	/*
+   echo("\nReturning value of __soapCall() call: ".$return);
+
+   echo("\nDumping request headers:\n" 
+      .$client->__getLastRequestHeaders());
+
+   echo("\nDumping request:\n".$client->__getLastRequest());
+
+   echo("\nDumping response headers:\n"
+      .$client->__getLastResponseHeaders());
+
+	echo("\nDumping response:\n".$client->__getLastResponse());
+	*/
+	$db = new DB();
+	$datos=$db->sqlQuery("select fecha,info from crudo order by fecha desc limit 10");
+	while($a = mysql_fetch_object($datos)){
+		echo "<h3>".$a->fecha." : ".$a->info;
+
+	}
+?>

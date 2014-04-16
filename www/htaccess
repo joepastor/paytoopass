@@ -1,0 +1,4 @@
+AuthName "Web Protected"
+AuthType Basic
+AuthUserFile /home/joe/virlocServer/www/.htpasswd
+Require valid-USER

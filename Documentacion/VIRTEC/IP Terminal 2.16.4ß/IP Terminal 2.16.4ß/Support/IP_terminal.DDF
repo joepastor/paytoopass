@@ -1,0 +1,36 @@
+.OPTION EXPLICIT
+.Set Cabinet=off
+.Set Compress=off
+.Set MaxDiskSize=CDROM
+.Set ReservePerCabinetSize=6144
+.Set DiskDirectoryTemplate=".."
+.Set CompressionType=MSZIP
+.Set CompressionLevel=7
+.Set CompressionMemory=21
+.Set CabinetNameTemplate="IP terminal.CAB"
+"Setup.Lst"
+"setup.exe"
+.Set Cabinet=on
+.Set Compress=on
+"IP terminal.exe"
+"MSVBVM60.dll"
+"OLEAUT32.DLL"
+"OLEPRO32.DLL"
+"ASYCFILT.DLL"
+"STDOLE2.TLB"
+"COMCAT.DLL"
+"vb6es.dll"
+"Crypter.dll"
+"MSWINSCK.OCX"
+"winskes.dll"
+"MSCOMCTL.OCX"
+"mscmces.dll"
+"COMDLG32.OCX"
+"cmdlges.dll"
+"mscomct2.ocx"
+"MSCC2ES.DLL"
+"COMCT332.OCX"
+"CMCT3ES.DLL"
+"SETUP1.EXE"
+"VB6STKIT.DLL"
+"ST6UNST.EXE"
