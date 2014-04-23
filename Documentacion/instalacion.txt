@@ -1,0 +1,4 @@
+1 - Instalar python pythonmysqldb php5 apache mysql-server
+2 - Importar la ultima base de datos
+3 - Linkear el sitio web al directorio www
+4 - Instalar soappy "sudo python setup.py install"

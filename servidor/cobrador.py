@@ -76,7 +76,7 @@ while(1):
 			print "La transaccion no pudo ser ingresada"
 			estado=request.status
 			mensaje=request.msg
-			xvm.enviarMensaje(id_virloc,mensaje,1)
+			xvm.sendDirectMsg(id_virloc,mensaje,1)
 				
 		if request.status=="PENDING":
 			print "Necesario confirmar. Intentando"
