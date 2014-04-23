@@ -6,24 +6,11 @@ include "header.php";
 <meta http-equiv="refresh" content="1">
 <?php
 echo "<h1>Hora actual: ".date("Y-m-d H:i")."</h1>";
-include "db.php";
+//include "db.php";
+include "server.php";
 # HelloClient.php
 # Copyright (c) 2005 by Dr. Herong Yang
 #
-   $client = new SoapClient(null, array(
-	  'encoding' => "UTF-8",
-      'location' => "http://sarita.localhost/server.php",
-      'uri'      => "urn://www.herong.home/re",
-	  'exception' => 1,
-      'trace'    => 1 ));
-
-	$autos=$client->getAutos();
-
-	/*
-	$return = $client->__soapCall("hello",array("world"));
-	echo $return;
-	*/
-	//echo $client->__soapCall("getAutos",array());
 
 	$db = new DB();
 
@@ -33,14 +20,13 @@ include "db.php";
 	<?php
 	while($a = mysql_fetch_object($datos)){
 		echo "<tr><td>".$a->id."</td><td>".$a->timestamp."</td><td>".$a->ip."</td><td>".$a->puerto."</td><td>".$a->latitud.",".$a->longitud."</td><td>".$a->velocidad."</td><td>".$a->rumbo."</td><td>".$a->chofer."</td><td>".$a->estado."</td>";
-
 	}
 	?>
 	</table>
+	
 	<?php
 	$datos=$db->sqlQuery("select fecha,info from crudo order by fecha desc limit 30");
 	while($a = mysql_fetch_object($datos)){
 		echo $a->fecha . " : " . $a->info."<br>";
-
 	}
 ?>
