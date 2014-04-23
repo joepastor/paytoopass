@@ -62,35 +62,71 @@ class XVM:
 					id_respuesta = id_mensaje + 1
 		return str(id_respuesta).zfill(4)
 
-	def enviarMensaje(self, id_virloc, mensaje,vircom):
+	def sendDirectMsg(self, id_virloc, mensaje,vircom):
+		# Este mensaje no pasa por la cola, va al virloc directo y luego se ingresa en la tabla
+
+		# Obtengo el id de mensaje que debo asignar
+		id_mensaje = self.getIDMensaje()
+		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
+
 		# Si la variable "vircom" esta en 1, se enviara el mensaje a la pantalla del equipo (VIRCOM)
 		# Si no, se considerara un mensaje interno (VIRLOC)
-		DB = db()
-		d = DB.sqlSelect("ip,puerto", "equipos", "id=%s" % id_virloc)
-		for ip, port in d.fetchall():
-			addr = (ip, int(port))
-			#print addr
+		# Como el mensaje es para el VIRCOM (pantalla) y no para el virloc, entonces se pone una "V" al final del id
+		if int(vircom) == 1:
+			# Mensaje para el vircom sin formato
+			envio = ">%s;ID=%sV;#%s;" % (mensaje,id_virloc,id_mensaje)
+		else:
+			# Mensaje interno para el virloc
+			envio = ">%s;ID=%s;#%s;" % (mensaje,id_virloc,id_mensaje)
+	
+		# Inserto el mensaje en la BD. Deberia poner un flag de enviado automaticamente en 1 (al momento no tiene ese flag la base de datos)
+		DB.sqlInsert("mensajes", "id_mensaje=%s, id_mensaje_hex='%s', mensaje='%s Directo', id_virloc=%s" % (id_mensaje, id_mensaje_hex, envio, id_virloc))
+
+		self.sendMsg(id_virloc,envio)
+
+	def sendMsgToQueue(self,id_virloc, mensaje,vircom):
 
 		id_mensaje = self.getIDMensaje()
 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
-		if int(vircom) == 1:
-			# Mensaje para el vircom sin formato
-			respuesta = ">%s;ID=%sV;#%s;" % (mensaje,id_virloc,id_mensaje)
-		else:
-			# Mensaje interno para el virloc
-			respuesta = ">%s;ID=%s;#%s;" % (mensaje,id_virloc,id_mensaje)
-	
-		# Comentario 1: Como el mensaje es para el VIRCOM (pantalla) y no para el virloc, entonces se pone una "V" al final del id
-		#respuesta = ">SMT%s;ID=%s;%s;" % (id_mensaje,id_virloc,mensaje)
-		respuesta += "*%s<\r\n" % calculateChecksum(respuesta)
-		DB.sqlInsert("mensajes", "id_mensaje=%s, id_mensaje_hex='%s', mensaje='%s', id_virloc=%s" % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
-		#exit()
-		print "Enviando: %s a %s:%s" % (respuesta, ip, port)
+		
+		DB = db()
+		DB.sqlInsert("mensajes", "mensaje='%s', id_virloc=%s" % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
+
+	def sendQueuedMsg(self,id):
+		# ID - es el id de la tabla mensajes. mensajes.id
+		DB = db()
+		d = DB.sqlSelect("mensaje, id_virloc", "mensajes", "id=%s" % id)
+		for mensaje, id_virloc in d.fetchall():
+			# Envio el mensaje
+			self.sendMsg(id_virloc, mensaje)
+			
+			# Calculo el id de mensaje que debo asignar
+			id_mensaje = self.getIDMensaje()
+			id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
+			
+			# Update en la base
+			DB.sqlUpdate("mensajes","id_mensaje='%s',id_mensaje_hex='%s',enviado=1" % (id_mensaje,id_mensaje_hex),"id=%s" % id)
+
+	def ackMsgQueue(self):
+		# Sirve para poner como recibido un mensjae enviado desde la cola
+		print "ack";
+		
+	def sendMsg(self,equipo,mensaje):
+		# Envia mensaje al puerto e ip de un virloc
+		print "Enviando: %s a %s" % (mensaje, equipo)
+
+		# Agrego el checksum al mensaje
+		mensaje += "*%s<\r\n" % calculateChecksum(mensaje)
+
+		# Busco el puerto e ip del equipo al que quiero contactar
+		DB = db()
+		d = DB.sqlSelect("ip,puerto", "equipos", "id=%s" % equipo)
+		for ip, port in d.fetchall():
+			addr = (ip, int(port))
+
+		# Abro conexion y envio datos
 		UDPSock = socket(AF_INET, SOCK_DGRAM)
 		UDPSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 		UDPSock.bind(('', 4097))
-
-		#print respuesta
-		#print addr
-		UDPSock.sendto(respuesta, addr)
+		UDPSock.sendto(mensaje, addr)
 		UDPSock.close()

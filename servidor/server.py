@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Este archivo procesa los datos en la tabla crudo y los inserta
+# en las tablas correspondientes para que luego los otros agentes ejecuten
+# las distintas acciones.
+
 
 import select
 import os
@@ -42,12 +46,9 @@ while(1):
 				choferhabilitado=1
 				if choferhabilitado==1:
 					print "Chofer habilitado"
-					
-					mensaje="SSH001"
 					xvm=XVM()
-					xvm.enviarMensaje(id_virloc,mensaje,0)
+					xvm.sendDirectMsg(id_virloc,"SSH001",0)
 					DB.sqlUpdate("equipos","chofer=%s" % chofer,"id=%s" % id_virloc)
-
 				else:
 					print "Chofer NO HABILITADO"
 			if info[4:6]=="02":

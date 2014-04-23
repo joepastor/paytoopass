@@ -60,7 +60,7 @@ while(1):
 		# Si es debug, entonces genero un paquete arbitrario para poder utilizar a fines de analisis
 		print("Debug mode, ACTIVATED")
 		x = XVM()
-		x.enviarMensaje(1234,"Enviando Mensaje")
+		x.sendMsg(1234,"Enviando Mensaje")
 		recv_data=input("Ingrese Paquete: ")
 		#>RUS02,080513154955,8888----,00001,0000.000,6565444------- 1,123.78-,1
 		#>RUS03,080513161927,8888----,00001,0000.000,08316484--------,1010101---------,7.89-,2;ID=1234;#000B;*03<
@@ -93,6 +93,8 @@ while(1):
 		# ---
 
 		if debug == 0:
+            # Esta parte no utiliza el enviador de mensajes para que sea lo mas rapido posible
+            # El virloc se bloquea si no recibe respuesta de los mensajes que envia
 			respuesta=">ACK;ID=%s;%s;" % (id_virloc,id_mensaje)
 			respuesta+="*%s<\r\n" % calculateChecksum(respuesta)
 			print(("Respondiendo a %s:%s | %s" % (host,port,respuesta)))
@@ -101,7 +103,6 @@ while(1):
 			UDPSock.bind(('',4097))
 			UDPSock.sendto(respuesta,addr)
 			UDPSock.close()
-
 	else:
 		print " ¡ERROR DE CHECKSUM! " * 3
 

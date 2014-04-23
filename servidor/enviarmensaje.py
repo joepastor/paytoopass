@@ -12,4 +12,4 @@ while 1:
 	mensaje = mensaje[:75]
 	#mensaje = mensaje.ljust(95,"-")
 	#respuesta = ">SMT00000000%s;" % (mensaje)
-	xvm.enviarMensaje(idvirloc,mensaje,pantalla)
+	xvm.sendMsgQueue(idvirloc,mensaje,pantalla)
