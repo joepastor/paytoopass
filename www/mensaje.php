@@ -9,7 +9,16 @@ $db = new db ();
 </head>
 <?php
 if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!=""){
-	$db->sendMsg($_POST["virloc"],$_POST["mensaje"]);
+	if($_POST["TIPO"]=="pantalla"){
+		$mensaje="SSC26".$_POST["mensaje"];
+		$id=$_POST["virloc"]."V";
+	}else{
+		$mensaje=$_POST["mensaje"];
+		$id=$_POST["virloc"];
+	}
+	if($mensaje){
+		$db->sendMsg($id,$mensaje);
+	}
 }
 ?>
 <body>
@@ -24,7 +33,11 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 ?>
 </select>
 <br>
+<input type="radio" name="tipo" value="pantalla" checked>Screen</input>
+<input type="radio" name="tipo" value="interno">Core</input>
+<br>
 <textarea rows="3" cols="10" id="mensaje" name="mensaje"></textarea>
+<br>
 <button>Enviar</button>
 </form>
 </body>
