@@ -5,8 +5,8 @@ import SOAPpy
 
 class paytoo:
 	url = 'https://merchant.paytoo.info/api/merchant/?wsdl'
-	merchant_id = '66395537'
-	api_password = 'pruebatest'
+	merchant_id = '97383913'
+	api_password = 'testing'
 	
 	def cobrarWallet(self,importe,cliente,password):
 		print "Cobrando con wallet - %s al cliente %s:%s" % (importe,cliente,password)
