@@ -3,25 +3,26 @@ caption{
 	font-style: italic;
 	text-align: left;
 }
-#equipos{
+.report_table{
 	font-size: 13px;
 	border: 1px solid;
 	width: 100%;
 }
-#equipos th{
+.report_table th{
 	background-color: #cccccc;
 	text-align: center;
 }
+
 #crudo {
 	font-size: 10px;
 	font-style: italic;
 	border: 1px solid;
 }
-.no-levantado{
+.bad_row{
 	background-color: red;
 	color: white;
 }
-.levantado{
+.ok_row{
 	color: green;
 }
 table{
