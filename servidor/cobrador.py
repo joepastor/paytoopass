@@ -66,13 +66,13 @@ while(1):
 		print request.msg
 		print request.status
 		if request.status=="OK":
-			xvm.enviarMensaje(id_virloc,"SSC26",1)
+			xvm.sendDirectMsg(id_virloc,"SSC26",1)
 			print "Transaccion COMPLETADA"
 			estado=request.status
 			mensaje=request.msg
 		
 		if request.status=="ERROR":
-			xvm.enviarMensaje(id_virloc,"SSC27",1)
+			xvm.sendDirectMsg(id_virloc,"SSC27",1)
 			print "La transaccion no pudo ser ingresada"
 			estado=request.status
 			mensaje=request.msg
@@ -86,15 +86,15 @@ while(1):
 			print request2.msg
 			print request2.status
 			if request2.status=="OK":
-				xvm.enviarMensaje(id_virloc,"SSC26",1)
+				xvm.sendDirectMsg(id_virloc,"SSC26",1)
 				print "Transaccion COMPLETADA"
 				DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
 			else:
-				xvm.enviarMensaje(id_virloc,"SSC27",1)
+				xvm.sendDirectMsg(id_virloc,"SSC27",1)
 				print "La transaccion no pudo ser confirmada"
 				#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
 				DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
-				xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
+				xvm.sendDirectMsg(id_virloc,"SMT0000000%s" % request2.msg,1)
 		
 		
 	
