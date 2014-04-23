@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import select
 import os
 from time import sleep
@@ -55,7 +54,8 @@ while(1):
 			'cc_year': '14'
 			}
 
-			#request=transaccion.cobrarTarjeta(CreditCard,Customer,monto)
+			request = transaccion.cobrarTarjeta(CreditCard,Customer,monto)
+			print request
 			print "Transaccion ingresada. "
 
 			xvm=XVM()
