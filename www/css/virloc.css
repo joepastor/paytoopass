@@ -1,0 +1,29 @@
+caption{
+	font-size: 25px;
+	font-style: italic;
+	text-align: left;
+}
+#equipos{
+	font-size: 13px;
+	border: 1px solid;
+	width: 100%;
+}
+#equipos th{
+	background-color: #cccccc;
+	text-align: center;
+}
+#crudo {
+	font-size: 10px;
+	font-style: italic;
+	border: 1px solid;
+}
+.no-levantado{
+	background-color: red;
+	color: white;
+}
+.levantado{
+	color: green;
+}
+table{
+	margin-top: 20px;
+}

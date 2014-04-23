@@ -1,7 +1,7 @@
 <?php
 class db {
-    private $usuario = "sarita";
-    private $password="cadorna";
+    private $usuario = "root";
+    private $password="";
     private $host="127.0.0.1";
 
     function __construct(){
