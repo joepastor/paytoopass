@@ -1,18 +1,13 @@
 #!/bin/bash
 proceso="agente.py"
-pid=`ps auxw | grep $proceso | grep -v grep`
-if [ -z "$pid" ]; then
-        echo "Agente caido. Levantando..."
-        /paytoopass/servidor/$proceso.py &
-else
-        echo "El Agente esta levantado"
-fi
 
-proceso="server.py"
-pid=`ps auxw | grep $proceso | grep -v grep`
-if [ -z "$pid" ]; then
-        echo "Server caido. Levantando..."
-        /paytoopass/servidor/$proceso.py &
-else
-        echo "El Server esta levantado"
+array=( agente.py server.py messenger.py cobrador.py )
+for i in "${array[@]}"
+do
+	if [ -z "$pid" ]; then
+        echo "$i caido. Levantando..."
+        python /paytoopass/servidor/$i &
+	else
+        echo "El Agente $i esta levantado"
 fi
+done
