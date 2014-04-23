@@ -5,7 +5,7 @@ import MySQLdb, sys
 class db:
 	def __init__(self):
 		try:
-			self.dataBase = MySQLdb.connect(host='127.0.0.1',user='root',passwd='t0r0nj4',db='sarita')
+			self.dataBase = MySQLdb.connect(host='127.0.0.1',user='root',passwd='',db='sarita')
 			self.curs = self.dataBase.cursor()
 		except MySQLdb.Error, e:
 			print e
