@@ -50,15 +50,14 @@ while(1):
 			'cc_holder_name': 'DEMO USER',
 			'cc_number': '4444333322221111',
 			'cc_cvv': '123',
-			'cc_month': '12',
+			'cc_month': '04',
 			'cc_year': '14'
 			}
 
 			request = transaccion.cobrarTarjeta(CreditCard,Customer,monto)
-			print request
 			print "Transaccion ingresada. "
 
-			xvm=XVM()
+				#xvm=XVM()
 				#else:
 				#print "La transaccion no pudo ser ingresada"
 				#xvm.enviarMensaje(id_virloc,"SSC27",1)
@@ -76,6 +75,8 @@ while(1):
 			print "La transaccion no pudo ser ingresada"
 			estado=request.status
 			mensaje=request.msg
+			print estado
+			print mensaje
 			xvm.sendDirectMsg(id_virloc,mensaje,1)
 				
 		if request.status=="PENDING":

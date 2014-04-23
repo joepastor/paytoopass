@@ -14,11 +14,10 @@ class paytoo:
 		token = proxy.auth(self.merchant_id, self.api_password)
 		
 		#response = proxy.SingleTransaction(cliente.zfill(8), '539482', importe, 'ARS', '1234', 'Order 1234');
-		response = proxy.SingleTransaction(cliente.zfill(8), '123456', float(importe), 'ARS', '1234', 'Order 1234');
+		response = proxy.SingleTransaction(cliente.zfill(8), '123456', float(importe), 'USD', '1234', 'Order 1234');
 		print "ID: %s" % response.request_id
-		return response
-
 		proxy.logout()
+		return response
 	
 	def cobrarTarjeta(self,tarjeta,cliente,importe):
 		print "Cobrando con tarjeta - %s al cliente %s" % (importe,cliente)
