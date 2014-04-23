@@ -80,6 +80,7 @@ class XVM:
 			envio = ">%s;ID=%s;#%s;" % (mensaje,id_virloc,id_mensaje)
 	
 		# Inserto el mensaje en la BD. Deberia poner un flag de enviado automaticamente en 1 (al momento no tiene ese flag la base de datos)
+		DB = db()
 		DB.sqlInsert("mensajes", "id_mensaje=%s, id_mensaje_hex='%s', mensaje='%s Directo', id_virloc=%s" % (id_mensaje, id_mensaje_hex, envio, id_virloc))
 
 		self.sendMsg(id_virloc,envio)
