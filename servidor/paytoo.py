@@ -23,11 +23,11 @@ class paytoo:
 		print "Cobrando con tarjeta - %s al cliente %s" % (importe,cliente)
 		proxy = SOAPpy.WSDL.Proxy(self.url)
 		token = proxy.auth(self.merchant_id, self.api_password)
-		response = proxy.CreditCardSingleTransaction(tarjeta, cliente, float(importe), 'ARS', '1234', 'Order 1234');
+		response = proxy.CreditCardSingleTransaction(tarjeta, cliente, float(importe), 'USD', '1234', 'Order 1234');
 		print "ID: %s" % response.request_id
 		proxy.logout()
 		return response
-	
+
 	def confirmar(self,request,password):
 		print "Confirmando..."
 		proxy = SOAPpy.WSDL.Proxy(self.url)

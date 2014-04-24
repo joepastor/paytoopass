@@ -29,7 +29,7 @@ Virloc:
 $datos = $db->sqlQuery ( "select id from equipos" );
 while ( $a = mysql_fetch_object ( $datos ) ) {
 	echo "<option value=".$a->id.">".$a->id."</option>";
-}	
+}
 ?>
 </select>
 <br>

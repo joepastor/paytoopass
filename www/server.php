@@ -42,9 +42,9 @@ function getPagos() {
 	 * Crude information about the data on the database. $fecha - datetimeformat of the time
 	 */
 	$db = new db ();
-	$datos = $db->sqlQuery ( "select fecha,cuenta,id_chofer,monto,id_virloc,tipo_cobro,tiempo,distancia, estado,mensaje from pagos" );
+	$datos = $db->sqlQuery ( "select fecha,cuenta,id_chofer,monto,id_virloc,tipo_cobro,tiempo,distancia, estado,mensaje from pagos order by fecha desc limit 10" );
 	$retorna = "<table class='report_table'><caption>Pagos</caption>";
-	$retorna .= "<tr><th>Time</th><th>Account</th><th>Driver</th><th>Amount</th><th>ID</th><th>Method</th><th>Time</th><th>Distance</th><th>Status</th><th>Msg</th></tr>";
+	$retorna .= "<tr><th>Time</th><th>Driver</th><th>Amount</th><th>ID</th><th>Method</th><th>Time</th><th>Distance</th><th>Status</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		if ($a->estado == "OK") {
 			$class = "ok_row";
@@ -53,7 +53,7 @@ function getPagos() {
 		}
 		$retorna .= "<tr class='$class'>";
 		$retorna .= "<td>" . $a->fecha . "</td>";
-		$retorna .= "<td>" . $a->cuenta . "</td>";
+		//$retorna .= "<td>" . $a->cuenta . "</td>";
 		$retorna .= "<td>" . $a->id_chofer . "</td>";
 		$retorna .= "<td>" . $a->monto . "</td>";
 		$retorna .= "<td>" . $a->id_virloc . "</td>";
