@@ -33,14 +33,14 @@ while(1):
 			print desencriptar(cuenta)
 			
 			Customer = {
-			'email': 'warneson@gmail.com',
-			'firstname': '',
-			'lastname': '',
-			'address': '',
-			'city': '',
-			'zipcode': '',
-			'state': '',
-			'country': '',
+			'email': 'jlopez.mail@gmail.com	',
+			'firstname': 'Joe',
+			'lastname': 'Pastor',
+			'address': 'Some Cool Street',
+			'city': 'BUE',
+			'zipcode': 'CA1143',
+			'state': 'AR',
+			'country': 'AR',
 			'level': ''
 			}
 

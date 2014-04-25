@@ -20,10 +20,12 @@ class paytoo:
 		return response
 	
 	def cobrarTarjeta(self,tarjeta,cliente,importe):
-		print "Cobrando con tarjeta - %s al cliente %s" % (importe,cliente)
+		print "Cobrando con tarjeta - %s al cliente %s" % (importe,tarjeta,cliente)
+		ref_id = "1234" #Some Random Number
+		currency="USD"
 		proxy = SOAPpy.WSDL.Proxy(self.url)
 		token = proxy.auth(self.merchant_id, self.api_password)
-		response = proxy.CreditCardSingleTransaction(tarjeta, cliente, float(importe), 'USD', '1234', 'Order 1234');
+		response = proxy.CreditCardSingleTransaction(tarjeta, cliente, float(importe), currency, ref_id, 'Order 1234');
 		print "ID: %s" % response.request_id
 		proxy.logout()
 		return response
