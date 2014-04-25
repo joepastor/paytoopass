@@ -71,7 +71,7 @@ while(1):
 			mensaje=request.msg
 			print "Transaccion ingresada. "
 			print "Estado: %s Mensaje: %s" % (estado,mensaje)
-			DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
+			DB.sqlUpdate("""pagos""","""estado='%s',mensaje='%s'""" % (estado,mensaje),"id=%s" % id)
 
 		if request.status=="OK":
 			xvm.sendDirectMsg(id_virloc,"SSC26",1)
@@ -110,7 +110,7 @@ while(1):
 			else:
 				estado="TOSIGN"
 
-		DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
+		DB.sqlUpdate("""pagos""","""estado='%s',mensaje='%s'""" % (estado,mensaje),"""id=%s""" % id)
 
 		restantes=restantes-1
 		print "-"*50
