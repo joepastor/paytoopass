@@ -2,6 +2,7 @@ import sys
 
 sys.path.insert(1, "..")
 import SOAPpy
+from random import randint
 
 class paytoo:
 	url = 'https://merchant.paytoo.info/api/merchant/?wsdl'
@@ -22,7 +23,8 @@ class paytoo:
 	
 	def cobrarTarjeta(self,tarjeta,cliente,importe):
 		print "Cobrando con tarjeta - %s al cliente %s %s" % (importe,tarjeta,cliente)
-		ref_id = "1234" #Some Random Number
+		ref_id = randint(1,9999) #Some Random Number
+		print ref_id
 		currency="USD"
 		proxy = SOAPpy.WSDL.Proxy(self.url)
 		token = proxy.auth(self.merchant_id, self.api_password)

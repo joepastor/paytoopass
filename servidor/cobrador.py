@@ -10,6 +10,12 @@ from encriptacion import desencriptar
 os.system("clear")
 DB = db()
 xvm=XVM()
+
+def is_luhn_valid(cc): #Parametro ejemplo 4896889802135
+	# Algoritmo sacado de internet para verificar la validez de la tarjeta
+    num = map(int, str(cc))
+    return sum(num[::-2] + [sum(divmod(d * 2, 10)) for d in num[-2::-2]]) % 10 == 0
+
 while(1):
 	sleep(1)
 
@@ -32,8 +38,14 @@ while(1):
 			
 			print desencriptar(cuenta)
 			
+			# Primer digito de tarjeta
+			# 3 american
+			# 4 visa
+			# 5 mastercard
+			# 6 Discover
+			
 			Customer = {
-			'email': 'jopez.mail@gmail.com	',
+			'email': 'jlopez.mail@gmail.com',
 			'firstname': 'Joe',
 			'lastname': 'Pastor',
 			'address': 'Some Cool Street',
@@ -44,7 +56,7 @@ while(1):
 			'level': ''
 			}
 
-
+			
 			CreditCard = {
 			'cc_type': 'VISA',
 			'cc_holder_name': 'DEMO USER',
@@ -57,13 +69,8 @@ while(1):
 			request = transaccion.cobrarTarjeta(CreditCard,Customer,monto)
 			print "Transaccion ingresada. "
 
-				#xvm=XVM()
-				#else:
-				#print "La transaccion no pudo ser ingresada"
-				#xvm.enviarMensaje(id_virloc,"SSC27",1)
+		print "Estado: %s Mensaje: %s" % (request.status,request.msg)	
 
-		print request.msg
-		print request.status
 		if request.status=="OK":
 			xvm.sendDirectMsg(id_virloc,"SSC26",1)
 			print "Transaccion COMPLETADA"
@@ -72,34 +79,32 @@ while(1):
 		
 		if request.status=="ERROR":
 			xvm.sendDirectMsg(id_virloc,"SSC27",1)
-			print "La transaccion no pudo ser ingresada"
+			print "La transaccion no pudo ser completada"
 			estado=request.status
 			mensaje=request.msg
-			print estado
-			print mensaje
 			xvm.sendDirectMsg(id_virloc,mensaje,1)
 				
 		if request.status=="PENDING":
-			print "Necesario confirmar. Intentando"
-			request2 = transaccion.confirmar(request.request_id,password)
-			estado=request2.status
-			mensaje=request2.msg
-			print request2.msg
-			print request2.status
-			if request2.status=="OK":
-				xvm.sendDirectMsg(id_virloc,"SSC26",1)
-				print "Transaccion COMPLETADA"
-				DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
-			else:
-				xvm.sendDirectMsg(id_virloc,"SSC27",1)
-				print "La transaccion no pudo ser confirmada"
-				#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
-				DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
-				xvm.sendDirectMsg(id_virloc,"SMT0000000%s" % request2.msg,1)
+			print "Necesario confirmar"
+			if tipo_cobro=='TARJETA_PREAUTH':
+				print "Intentando confirmar"
+				request2 = transaccion.confirmar(request.request_id,password)
+				estado=request2.status
+				mensaje=request2.msg
+				print request2.msg
+				print request2.status
+				
+				if request2.status=="OK":
+					xvm.sendDirectMsg(id_virloc,"SSC26",1)
+					print "Confirmacion COMPLETADA"
+					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
+				else:
+					xvm.sendDirectMsg(id_virloc,"SSC27",1)
+					print "La transaccion no pudo ser confirmada"
+					#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
+					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
+					xvm.sendDirectMsg(id_virloc,"SMT0000000%s" % request2.msg,1)
 		
-		
-	
-	
 		DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
 
 
