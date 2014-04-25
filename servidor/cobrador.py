@@ -87,7 +87,6 @@ while(1):
 		if request.status=="PENDING":
 			print "Necesario confirmar"
 			xvm.sendDirectMsg(id_virloc,"SSC26",1)
-			
 			if tipo_cobro=='TARJETA_PREAUTH':
 				print "Intentando confirmar"
 				request2 = transaccion.confirmar(request.request_id,password)
