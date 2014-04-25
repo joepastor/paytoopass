@@ -107,6 +107,8 @@ while(1):
 					#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
 					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
 					xvm.sendDirectMsg(id_virloc,"SMT0000000%s" % request2.msg,1)
+			else:
+				estado="TOSIGN"
 
 		DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
 
