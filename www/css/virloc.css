@@ -25,6 +25,9 @@ caption{
 .ok_row{
 	color: green;
 }
+.pending_row{
+	color: orange;
+}
 table{
 	margin-top: 20px;
 }
