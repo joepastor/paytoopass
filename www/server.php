@@ -46,10 +46,15 @@ function getPagos() {
 	$retorna = "<table class='report_table'><caption>Pagos</caption>";
 	$retorna .= "<tr><th>Time</th><th>Driver</th><th>Amount</th><th>ID</th><th>Method</th><th>Time</th><th>Distance</th><th>Status</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
-		if ($a->estado == "OK") {
-			$class = "ok_row";
-		} else {
-			$class = "bad_row";
+		switch ($a->estado){
+			case "OK":
+				$class = "ok_row";
+				break;
+			case "PENDING";
+				$class = "pending_row";
+				break;
+			default:
+				$class = "bad_row";
 		}
 		$retorna .= "<tr class='$class'>";
 		$retorna .= "<td>" . $a->fecha . "</td>";
