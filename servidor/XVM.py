@@ -114,7 +114,7 @@ class XVM:
 		
 	def sendMsg(self,equipo,mensaje):
 		# Envia mensaje al puerto e ip de un virloc
-		print "Enviando: %s a %s" % (mensaje, equipo)
+		print "Messenger: Enviando %s a %s" % (mensaje, equipo)
 
 		# Agrego el checksum al mensaje
 		mensaje += "*%s<\r\n" % calculateChecksum(mensaje)

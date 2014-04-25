@@ -67,9 +67,11 @@ while(1):
 			}
 
 			request = transaccion.cobrarTarjeta(CreditCard,Customer,monto)
+			estado=request.status
+			mensaje=request.msg
 			print "Transaccion ingresada. "
-
-		print "Estado: %s Mensaje: %s" % (request.status,request.msg)	
+			print "Estado: %s Mensaje: %s" % (estado,mensaje)
+			DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
 
 		if request.status=="OK":
 			xvm.sendDirectMsg(id_virloc,"SSC26",1)
@@ -105,9 +107,8 @@ while(1):
 					#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
 					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
 					xvm.sendDirectMsg(id_virloc,"SMT0000000%s" % request2.msg,1)
-		
-		DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
 
+		DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (estado,mensaje),"id=%s" % id)
 
 		restantes=restantes-1
 		print "-"*50
