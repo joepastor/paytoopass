@@ -45,6 +45,8 @@ class PaytooAccountType {
     var $custom_field3 = null;
     var $custom_field4 = null;
     var $custom_field5 = null;
+    var	$level	=	null;
+    
 }
 
 class PaytooCreditCardType {
@@ -96,7 +98,7 @@ try {
         $Customer->country = "US";
         $Customer->level="";
         
-        var_dump($Customer); 
+        
         $amount = 10.00; //"mandatory
         $currency = 'ARS'; //"mandatory
         
@@ -104,6 +106,7 @@ try {
         $ref_id = rand(1000, 9999); //"mandatory
         $description = "Order #".$ref_id." with Paytoo Merchant";
         $addinfo = "";
+        
         $response = $soap->CreditCardSingleTransaction($CreditCard,$Customer,$amount,$currency,$ref_id,$description);
         
         if ($response->status == 'OK') {

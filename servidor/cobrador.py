@@ -33,7 +33,7 @@ while(1):
 			print desencriptar(cuenta)
 			
 			Customer = {
-			'email': 'jlopez.mail@gmail.com	',
+			'email': 'jopez.mail@gmail.com	',
 			'firstname': 'Joe',
 			'lastname': 'Pastor',
 			'address': 'Some Cool Street',

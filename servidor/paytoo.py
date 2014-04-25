@@ -5,6 +5,7 @@ import SOAPpy
 
 class paytoo:
 	url = 'https://merchant.paytoo.info/api/merchant/?wsdl'
+	url = 'https://go.paytoo.info/api/merchant/?wsdl'
 	merchant_id = '97383913'
 	api_password = 'testing'
 	
@@ -20,7 +21,7 @@ class paytoo:
 		return response
 	
 	def cobrarTarjeta(self,tarjeta,cliente,importe):
-		print "Cobrando con tarjeta - %s al cliente %s" % (importe,tarjeta,cliente)
+		print "Cobrando con tarjeta - %s al cliente %s %s" % (importe,tarjeta,cliente)
 		ref_id = "1234" #Some Random Number
 		currency="USD"
 		proxy = SOAPpy.WSDL.Proxy(self.url)
