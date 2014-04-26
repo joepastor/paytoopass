@@ -21,7 +21,7 @@ while(1):
 
 	# Comienzo a consultar todos los movimientos que no han sido procesados
 	rs = DB.sqlSelect("id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password","pagos","estado='PENDING'")
-	restantes=rs.rowcount
+	#restantes=rs.rowcount
 
 	for id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password in rs.fetchall():
 		#print id_virloc
