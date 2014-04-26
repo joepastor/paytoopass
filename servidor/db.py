@@ -12,7 +12,8 @@ class db:
 			sys.exit(0)
 
 	def __ejecutar(self,sql):
-		#print sql
+		sql=sql.replace("'","")
+		print sql
 		try:
 			self.curs.execute(sql)
 			self.dataBase.commit()
