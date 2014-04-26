@@ -81,7 +81,7 @@ class XVM:
 	
 		# Inserto el mensaje en la BD. Deberia poner un flag de enviado automaticamente en 1 (al momento no tiene ese flag la base de datos)
 		DB = db()
-		DB.sqlInsert("mensajes", "id_mensaje=%s, id_mensaje_hex='%s', mensaje='%s Directo', id_virloc=%s" % (id_mensaje, id_mensaje_hex, envio, id_virloc))
+		DB.sqlInsert('mensajes', 'id_mensaje=%s, id_mensaje_hex="%s", mensaje="%s Directo", id_virloc=%s' % (id_mensaje, id_mensaje_hex, envio, id_virloc))
 
 		self.sendMsg(id_virloc,envio)
 
@@ -91,7 +91,7 @@ class XVM:
 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 		
 		DB = db()
-		DB.sqlInsert("mensajes", "mensaje='%s', id_virloc=%s" % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
+		DB.sqlInsert('mensajes', 'mensaje="%s", id_virloc=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
 
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
@@ -106,7 +106,7 @@ class XVM:
 			id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 			
 			# Update en la base
-			DB.sqlUpdate("mensajes","id_mensaje='%s',id_mensaje_hex='%s',enviado=1" % (id_mensaje,id_mensaje_hex),"id=%s" % id)
+			DB.sqlUpdate('mensajes','id_mensaje="%s",id_mensaje_hex="%s",enviado=1' % (id_mensaje,id_mensaje_hex),'id=%s' % id)
 
 	def ackMsgQueue(self):
 		# Sirve para poner como recibido un mensjae enviado desde la cola
@@ -121,7 +121,7 @@ class XVM:
 
 		# Busco el puerto e ip del equipo al que quiero contactar
 		DB = db()
-		d = DB.sqlSelect("ip,puerto", "equipos", "id=%s" % equipo)
+		d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
 		for ip, port in d.fetchall():
 			addr = (ip, int(port))
 
