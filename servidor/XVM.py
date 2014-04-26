@@ -113,9 +113,6 @@ class XVM:
 		print "ack";
 		
 	def sendMsg(self,equipo,mensaje):
-		# Envia mensaje al puerto e ip de un virloc
-		print "Messenger: Enviando %s a %s" % (mensaje, equipo)
-
 		# Agrego el checksum al mensaje
 		mensaje += "*%s<\r\n" % calculateChecksum(mensaje)
 
@@ -124,6 +121,9 @@ class XVM:
 		d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
 		for ip, port in d.fetchall():
 			addr = (ip, int(port))
+
+		# Envia mensaje al puerto e ip de un virloc
+		print "Messenger: Enviando %s a %s" % (mensaje, equipo)
 
 		# Abro conexion y envio datos
 		UDPSock = socket(AF_INET, SOCK_DGRAM)
