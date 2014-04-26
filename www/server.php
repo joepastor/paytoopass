@@ -53,6 +53,9 @@ function getPagos() {
 			case "PENDING";
 				$class = "pending_row";
 				break;
+			case "TOSIGN";
+				$class = "tosign_row";
+				break;				
 			default:
 				$class = "bad_row";
 		}

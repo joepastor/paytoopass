@@ -28,6 +28,9 @@ caption{
 .pending_row{
 	color: orange;
 }
+.tosign_row{
+	color: yellow;
+}
 table{
 	margin-top: 20px;
 }
