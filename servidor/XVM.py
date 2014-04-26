@@ -108,7 +108,7 @@ class XVM:
 				equipo=id_virloc
 			
 			# Construyo el mensaje el checksum al mensaje
-			send=">%s;ID=%s;#%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
+			send=">%s;ID=%s;%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
 
 			# Busco el puerto e ip del equipo al que quiero contactar
 			DB = db()
