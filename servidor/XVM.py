@@ -123,7 +123,7 @@ class XVM:
 			UDPSock = socket(AF_INET, SOCK_DGRAM)
 			UDPSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 			UDPSock.bind(('', 4097))
-			UDPSock.sendto(mensaje, addr)
+			UDPSock.sendto(send, addr)
 			UDPSock.close()
 
 			# Update en la base
