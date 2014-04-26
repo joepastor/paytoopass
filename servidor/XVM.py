@@ -92,6 +92,7 @@ class XVM:
 		
 		DB = db()
 		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", id_virloc=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
+		
 
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
