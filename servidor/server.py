@@ -32,7 +32,7 @@ while(1):
 		
 
 		# Actualizo los datos del equipo
-		DB.sqlInsertOrUpdate("equipos","id=%s,ip='%s',puerto=%s" % (id_virloc,host,port),"ip='%s',puerto=%s" % (host,port))
+		DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
 		array=paquete[0].split(",")
 		print info
 		# Selecciono el tipo de paquete
@@ -60,9 +60,9 @@ while(1):
 				monto=array[6].replace("-","")
 
 				cadena="fecha='%s',id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro='EFECTIVO',tiempo=%s,distancia=%s,estado='OK'" % (fecha,chofer,monto,id_virloc,tiempo,distancia)
-				DB.sqlInsert("pagos",cadena)
+				DB.sqlInsert('pagos',cadena)
 				estado="EN SERVICIO"
-				DB.sqlInsertOrUpdate("equipos","id=%s,estado='%s'" % (id_virloc,estado),"estado='%s'" % estado)
+				DB.sqlInsertOrUpdate('equipos','id=%s,estado="%s"' % (id_virloc,estado),'estado="%s"' % estado)
 
 
 			if info[4:6]=="03":
@@ -75,8 +75,8 @@ while(1):
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
-					cadena="fecha='%s',cuenta='%s',id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro='TARJETA',tiempo=%s,distancia=%s,estado='PENDING',password=%s" % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
-					DB.sqlInsert("pagos",cadena)
+					cadena='fecha="%s",cuenta="%s",id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="TARJETA",tiempo=%s,distancia=%s,estado="PENDING",password=%s' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+					DB.sqlInsert('pagos',cadena)
 				if array[8]=="2":
 					print "COBRANDO con WALLET"
 					array=paquete[0].split(",")
@@ -87,7 +87,7 @@ while(1):
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
-					cadena="fecha='%s',cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro='WALLET',tiempo=%s,distancia=%s,estado='PENDING',password='%s'" % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+					cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 					DB.sqlInsert("pagos",cadena)
 
 		if info[0:4]==">RGP" or info[0:4]==">RTT":
@@ -108,7 +108,7 @@ while(1):
 			numero_evento=paquete[0][44:46]
 			errorgps=paquete[0][46:48]
 			print "Fecha %s Hora GMT %s - Vehiculo %s - Tipo %s localizado en %s %s a %s kms/h con rumbo %s" % (fecha,hora,id_virloc,tipo,latitud,longitud,velocidad,rumbo)
-			DB.sqlInsertOrUpdate("equipos","id=%s,ip='%s',puerto=%s,latitud='%s',longitud='%s',velocidad=%s,rumbo=%s" % (id_virloc,host,port,latitud,longitud,velocidad,rumbo),"ip='%s',puerto=%s,latitud='%s',longitud='%s',velocidad=%s,rumbo=%s" % (host,port,latitud,longitud,velocidad,rumbo))
+			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (id_virloc,host,port,latitud,longitud,velocidad,rumbo),"ip='%s',puerto=%s,latitud='%s',longitud='%s',velocidad=%s,rumbo=%s" % (host,port,latitud,longitud,velocidad,rumbo))
 
 			evento=info[44:46]
 			if evento=="15":
@@ -140,9 +140,9 @@ while(1):
 
 			if estado<>"":
 				print "Cambio de estado vehiculo %s a estado %s" % (id_virloc,estado)
-				DB.sqlInsertOrUpdate("equipos","id=%s,estado='%s'" % (id_virloc,estado),"estado='%s'" % estado)
+				DB.sqlInsertOrUpdate('equipos','id=%s,estado="%s"' % (id_virloc,estado),'estado="%s"' % estado)
 
 
-		DB.sqlUpdate("crudo","levantado=1","id=%s" % id)
+		DB.sqlUpdate('crudo','levantado=1','id=%s' % id)
 		#restantes=restantes-1
 		print "-" * 80
