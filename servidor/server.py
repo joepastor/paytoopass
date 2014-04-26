@@ -32,7 +32,7 @@ while(1):
 		
 
 		# Actualizo los datos del equipo
-		DB.sqlInsertOrUpdate('equipos','id=%s,ipssssss="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
+		DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
 		array=paquete[0].split(",")
 		print info
 		# Selecciono el tipo de paquete
