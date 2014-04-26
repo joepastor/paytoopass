@@ -72,13 +72,13 @@ while(1):
 			DB.sqlUpdate("pagos",'estado="%s",mensaje="%s"' % (estado,mensaje),"id=%s" % id)
 
 		if request.status=="OK":
-			xvm.sendDirectMsg(id_virloc,'SSC26',1)
+			xvm.sendMsgToQueue(id_virloc,'SSC26',1)
 			print "Transaccion COMPLETADA"
 			estado=request.status
 			mensaje=request.msg
 		
 		if request.status=="ERROR":
-			xvm.sendDirectMsg(id_virloc,'SSC27',1)
+			xvm.sendMsgToQueue(id_virloc,'SSC27',1)
 			print "La transaccion no pudo ser completada"
 			estado=request.status
 			mensaje=request.msg
@@ -86,7 +86,7 @@ while(1):
 				
 		if request.status=="PENDING":
 			print "Necesario confirmar"
-			xvm.sendDirectMsg(id_virloc,'SSC26',1)
+			xvm.sendMsgToQueue(id_virloc,'SSC26',1)
 			if tipo_cobro=='TARJETA_PREAUTH':
 				print "Intentando confirmar"
 				request2 = transaccion.confirmar(request.request_id,password)
@@ -96,15 +96,15 @@ while(1):
 				print request2.status
 				
 				if request2.status=="OK":
-					xvm.sendDirectMsg(id_virloc,'SSC26',1)
+					xvm.sendMsgToQueue(id_virloc,'SSC26',1)
 					print "Confirmacion COMPLETADA"
 					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
 				else:
-					xvm.sendDirectMsg(id_virloc,'SSC27',1)
+					xvm.sendMsgToQueue(id_virloc,'SSC27',1)
 					print "La transaccion no pudo ser confirmada"
 					#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
 					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
-					xvm.sendDirectMsg(id_virloc,'SMT0000000%s' % request2.msg,1)
+					xvm.sendMsgToQueue(id_virloc,'SMT0000000%s' % request2.msg,1)
 			else:
 				estado="TOSIGN"
 

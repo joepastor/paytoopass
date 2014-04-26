@@ -62,28 +62,28 @@ class XVM:
 					id_respuesta = id_mensaje + 1
 		return str(id_respuesta).zfill(4)
 
-	def sendDirectMsg(self, id_virloc, mensaje,vircom):
-		# Este mensaje no pasa por la cola, va al virloc directo y luego se ingresa en la tabla
-
-		# Obtengo el id de mensaje que debo asignar
-		id_mensaje = self.getIDMensaje()
-		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
-
-		# Si la variable "vircom" esta en 1, se enviara el mensaje a la pantalla del equipo (VIRCOM)
-		# Si no, se considerara un mensaje interno (VIRLOC)
-		# Como el mensaje es para el VIRCOM (pantalla) y no para el virloc, entonces se pone una "V" al final del id
-		if int(vircom) == 1:
-			# Mensaje para el vircom sin formato
-			envio = ">%s;ID=%sV;#%s;" % (mensaje,id_virloc,id_mensaje)
-		else:
-			# Mensaje interno para el virloc
-			envio = ">%s;ID=%s;#%s;" % (mensaje,id_virloc,id_mensaje)
-	
-		# Inserto el mensaje en la BD. Deberia poner un flag de enviado automaticamente en 1 (al momento no tiene ese flag la base de datos)
-		DB = db()
-		DB.sqlInsert('mensajes', 'id_mensaje=%s, id_mensaje_hex="%s", mensaje="%s Directo", id_virloc=%s' % (id_mensaje, id_mensaje_hex, envio, id_virloc))
-
-		self.sendMsg(id_virloc,envio)
+# 	def sendDirectMsg(self, id_virloc, mensaje,vircom):
+# 		# Este mensaje no pasa por la cola, va al virloc directo y luego se ingresa en la tabla
+# 
+# 		# Obtengo el id de mensaje que debo asignar
+# 		id_mensaje = self.getIDMensaje()
+# 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
+# 
+# 		# Si la variable "vircom" esta en 1, se enviara el mensaje a la pantalla del equipo (VIRCOM)
+# 		# Si no, se considerara un mensaje interno (VIRLOC)
+# 		# Como el mensaje es para el VIRCOM (pantalla) y no para el virloc, entonces se pone una "V" al final del id
+# 		if int(vircom) == 1:
+# 			# Mensaje para el vircom sin formato
+# 			envio = ">%s;ID=%sV;#%s;" % (mensaje,id_virloc,id_mensaje)
+# 		else:
+# 			# Mensaje interno para el virloc
+# 			envio = ">%s;ID=%s;#%s;" % (mensaje,id_virloc,id_mensaje)
+# 	
+# 		# Inserto el mensaje en la BD. Deberia poner un flag de enviado automaticamente en 1 (al momento no tiene ese flag la base de datos)
+# 		DB = db()
+# 		DB.sqlInsert('mensajes', 'id_mensaje=%s, id_mensaje_hex="%s", mensaje="%s Directo", id_virloc=%s' % (id_mensaje, id_mensaje_hex, envio, id_virloc))
+# 
+# 		self.sendMsg(id_virloc,envio,id_mensaje)
 
 	def sendMsgToQueue(self,id_virloc, mensaje,vircom):
 
@@ -91,30 +91,28 @@ class XVM:
 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 		
 		DB = db()
-		DB.sqlInsert('mensajes', 'mensaje="%s", id_virloc=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
+		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", id_virloc=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
+
 
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
 		DB = db()
 		d = DB.sqlSelect("mensaje, id_virloc", "mensajes", "id=%s" % id)
 		for mensaje, id_virloc in d.fetchall():
-			# Envio el mensaje
-			self.sendMsg(id_virloc, mensaje)
-			
 			# Calculo el id de mensaje que debo asignar
 			id_mensaje = self.getIDMensaje()
 			id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
+
+			# Envio el mensaje
+			self.sendMsg(id_virloc, mensaje,id_mensaje)
 			
 			# Update en la base
 			DB.sqlUpdate('mensajes','id_mensaje="%s",id_mensaje_hex="%s",enviado=1' % (id_mensaje,id_mensaje_hex),'id=%s' % id)
 
-	def ackMsgQueue(self):
-		# Sirve para poner como recibido un mensjae enviado desde la cola
-		print "ack";
 		
-	def sendMsg(self,equipo,mensaje):
-		# Agrego el checksum al mensaje
-		mensaje += "*%s<\r\n" % calculateChecksum(mensaje)
+	def sendMsg(self,equipo,mensaje,id_mensaje):
+		# Construyo el mensaje el checksum al mensaje
+		send=">%s;ID=%s;%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
 
 		# Busco el puerto e ip del equipo al que quiero contactar
 		DB = db()
@@ -123,7 +121,7 @@ class XVM:
 			addr = (ip, int(port))
 
 		# Envia mensaje al puerto e ip de un virloc
-		print "Messenger: Enviando %s a %s" % (mensaje, equipo)
+		print "Messenger: Enviando %s a %s" % (send, equipo)
 
 		# Abro conexion y envio datos
 		UDPSock = socket(AF_INET, SOCK_DGRAM)

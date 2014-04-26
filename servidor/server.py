@@ -47,7 +47,7 @@ while(1):
 				if choferhabilitado==1:
 					print "Chofer habilitado"
 					xvm=XVM()
-					xvm.sendDirectMsg(id_virloc,"SSH001",0)
+					xvm.sendMsgToQueue(id_virloc,"SSH001",0)
 					DB.sqlUpdate('equipos','chofer=%s' % chofer,'id=%s' % id_virloc)
 				else:
 					print "Chofer NO HABILITADO"
