@@ -36,13 +36,7 @@ while(1):
 		if tipo_cobro=='TARJETA':
 			print "Procesando %s : $ %s para la tarjeta %s" % (id,monto,cuenta)
 			
-			print desencriptar(cuenta)
 			
-			# Primer digito de tarjeta
-			# 3 american
-			# 4 visa
-			# 5 mastercard
-			# 6 Discover
 			
 			Customer = {
 			'email': 'jlopez.mail@gmail.com',
@@ -56,7 +50,10 @@ while(1):
 			'level': ''
 			}
 
-			
+
+			CreditCard = getDecryptedCard(cuenta,'000')	
+			print CreditCard
+					
 			CreditCard = {
 			'cc_type': 'VISA',
 			'cc_holder_name': 'DEMO USER',
@@ -65,6 +62,7 @@ while(1):
 			'cc_month': '04',
 			'cc_year': '14'
 			}
+
 
 			request = transaccion.cobrarTarjeta(CreditCard,Customer,monto)
 			estado=request.status

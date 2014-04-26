@@ -41,3 +41,33 @@ def desencriptar(cadena):
         decrypted+=val
         start=start+1
     return decrypted.upper()
+
+def getDecryptedCard(cadena,pin):
+    # A esta funcion se le pasa el encriptado y el codigo de seguridad
+    # Devuelve el array tal como indica paytoo
+
+    # Primer digito de tarjeta
+    # 3 american
+    # 4 visa
+    # 5 mastercard
+    # 6 Discover
+
+    stream=desencriptar(cadena)
+    
+    tipo_tarjeta=stream[2:3]
+    if tipo_tarjeta == "3":
+        card="AMEX"
+    if tipo_tarjeta == "4":
+        card="VISA"
+    if tipo_tarjeta == "5":
+        card="MASTERCARD"
+
+    CreditCard = {
+            'cc_type': card,
+            'cc_holder_name': stream[18:43],
+            'cc_number': stream[2:18],
+            'cc_cvv': pin,
+            'cc_month': stream[46:48],
+            'cc_year': stream[44:46]
+            }
+    return CreditCard
