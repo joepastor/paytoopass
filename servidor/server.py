@@ -32,7 +32,7 @@ while(1):
 		
 
 		# Actualizo los datos del equipo
-		DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
+		DB.sqlInsertOrUpdate('equipos','id=%s,ipssssss="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
 		array=paquete[0].split(",")
 		print info
 		# Selecciono el tipo de paquete
@@ -48,7 +48,7 @@ while(1):
 					print "Chofer habilitado"
 					xvm=XVM()
 					xvm.sendDirectMsg(id_virloc,"SSH001",0)
-					DB.sqlUpdate("equipos","chofer=%s" % chofer,"id=%s" % id_virloc)
+					DB.sqlUpdate('equipos','chofer=%s' % chofer,'id=%s' % id_virloc)
 				else:
 					print "Chofer NO HABILITADO"
 			if info[4:6]=="02":
