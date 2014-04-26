@@ -43,10 +43,10 @@ class XVM:
 	def get(self):
 		return "%s %s Vehiculo %s - Tipo %s localizado en %s %s a %s kms/h con rumbo %s" % (self.fecha, self.hora, self.id_virloc, self.tipo, self.latitud, self.longitud, self.velocidad, self.rumbo)
 
-	def saveToFile(self):
-		inp = open(self.directorioweb, "w")
-		inp.write("%s,%s" % (self.latitud, self.longitud))
-		inp.close()
+# 	def saveToFile(self):
+# 		inp = open(self.directorioweb, "w")
+# 		inp.write("%s,%s" % (self.latitud, self.longitud))
+# 		inp.close()
 
 	def saveToDB(self):
 		DB = db()
@@ -91,41 +91,61 @@ class XVM:
 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 		
 		DB = db()
-		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", id_virloc=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc))
-		
+		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", id_virloc=%s,vircom=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc,vircom))
 
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
 		DB = db()
-		d = DB.sqlSelect("mensaje, id_virloc", "mensajes", "id=%s" % id)
-		for mensaje, id_virloc in d.fetchall():
+		d = DB.sqlSelect("mensaje, id_virloc,vircom", "mensajes", "id=%s" % id)
+		for mensaje, id_virloc,vircom in d.fetchall():
 			# Calculo el id de mensaje que debo asignar
 			id_mensaje = self.getIDMensaje()
 			id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 
-			# Envio el mensaje
-			self.sendMsg(id_virloc, mensaje,id_mensaje)
+			if vircom==1:
+				equipo="%sV" % id_virloc
+			else:
+				equipo=id_virloc
 			
+			# Construyo el mensaje el checksum al mensaje
+			send=">%s;ID=%s;%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
+
+			# Busco el puerto e ip del equipo al que quiero contactar
+			DB = db()
+			d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
+			for ip, port in d.fetchall():
+				addr = (ip, int(port))
+
+			# Envia mensaje al puerto e ip de un virloc
+			print "Messenger: Enviando %s a %s" % (send, equipo)
+
+			# Abro conexion y envio datos
+			UDPSock = socket(AF_INET, SOCK_DGRAM)
+			UDPSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+			UDPSock.bind(('', 4097))
+			UDPSock.sendto(mensaje, addr)
+			UDPSock.close()
+
 			# Update en la base
 			DB.sqlUpdate('mensajes','id_mensaje="%s",id_mensaje_hex="%s",enviado=1' % (id_mensaje,id_mensaje_hex),'id=%s' % id)
 
 		
-	def sendMsg(self,equipo,mensaje,id_mensaje):
-		# Construyo el mensaje el checksum al mensaje
-		send=">%s;ID=%s;%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
-
-		# Busco el puerto e ip del equipo al que quiero contactar
-		DB = db()
-		d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
-		for ip, port in d.fetchall():
-			addr = (ip, int(port))
-
-		# Envia mensaje al puerto e ip de un virloc
-		print "Messenger: Enviando %s a %s" % (send, equipo)
-
-		# Abro conexion y envio datos
-		UDPSock = socket(AF_INET, SOCK_DGRAM)
-		UDPSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-		UDPSock.bind(('', 4097))
-		UDPSock.sendto(mensaje, addr)
-		UDPSock.close()
+# 	def sendMsg(self,equipo,mensaje,id_mensaje):
+# 		# Construyo el mensaje el checksum al mensaje
+# 		send=">%s;ID=%s;%s;*%s<\r\n" % (mensaje,equipo,id_mensaje,calculateChecksum(mensaje))
+# 
+# 		# Busco el puerto e ip del equipo al que quiero contactar
+# 		DB = db()
+# 		d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
+# 		for ip, port in d.fetchall():
+# 			addr = (ip, int(port))
+# 
+# 		# Envia mensaje al puerto e ip de un virloc
+# 		print "Messenger: Enviando %s a %s" % (send, equipo)
+# 
+# 		# Abro conexion y envio datos
+# 		UDPSock = socket(AF_INET, SOCK_DGRAM)
+# 		UDPSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+# 		UDPSock.bind(('', 4097))
+# 		UDPSock.sendto(mensaje, addr)
+# 		UDPSock.close()

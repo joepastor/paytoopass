@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
 encoding//servidor/agente.py=utf-8
 encoding//servidor/db.py=utf-8
-encoding//servidor/enviarmensaje.py=utf-8
 encoding//servidor/messenger.py=utf-8
 encoding//servidor/server.py=utf-8
