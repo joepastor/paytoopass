@@ -13,7 +13,7 @@ class db:
 
 	def __ejecutar(self,sql):
 		sql=sql.replace("'","")
-		print sql
+		#print sql
 		try:
 			self.curs.execute(sql)
 			self.dataBase.commit()
