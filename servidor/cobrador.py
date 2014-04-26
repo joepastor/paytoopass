@@ -20,8 +20,8 @@ while(1):
 	sleep(1)
 
 	# Comienzo a consultar todos los movimientos que no han sido procesados
-	rs = DB.sqlSelect("id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password","pagos","estado='PENDING'")
-	#restantes=rs.rowcount
+	rs = DB.sqlSelect('id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password','pagos','estado="PENDING"')
+	restantes=rs.rowcount
 
 	for id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password in rs.fetchall():
 		#print id_virloc
@@ -71,7 +71,7 @@ while(1):
 			mensaje=request.msg
 			print "Transaccion ingresada. "
 			print "Estado: %s Mensaje: %s" % (estado,mensaje)
-			DB.sqlUpdate("pagos","estado='%s',mensaje='%s" % (estado,mensaje),"id=%s" % id)
+			DB.sqlUpdate("pagos",'estado="%s",mensaje="%s"' % (estado,mensaje),"id=%s" % id)
 
 		if request.status=="OK":
 			xvm.sendDirectMsg(id_virloc,"SSC26",1)
