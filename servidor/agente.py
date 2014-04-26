@@ -88,7 +88,7 @@ while(1):
 	if validateChecksum(recv_data):
 		# Apenas recibo informacion la inserto en la base de datos
 		DB = db()
-		DB.sqlInsert("crudo","info='%s',host='%s',port=%s" % (recv_data,host,port))
+		DB.sqlInsert('crudo','info="%s",host="%s",port=%s' % (recv_data,host,port))
 		DB.Close;
 		# ---
 
