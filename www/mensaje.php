@@ -13,9 +13,8 @@ if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!="")
 	if($_POST["tipo"]=="pantalla"){
 		$vircom=1;
 	}
-	if($mensaje){
-		$db->sendMsg($_POST["virloc"],$_POST["mensaje"],$vircom);
-	}
+
+	$db->sendMsg($_POST["virloc"],$_POST["mensaje"],$vircom);
 }
 ?>
 <body>
