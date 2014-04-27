@@ -113,7 +113,7 @@ class XVM:
 
 			# Busco el puerto e ip del equipo al que quiero contactar
 			DB = db()
-			d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % equipo)
+			d = DB.sqlSelect('ip,puerto', 'equipos', 'id=%s' % id_virloc)
 			for ip, port in d.fetchall():
 				addr = (ip, int(port))
 
