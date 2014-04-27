@@ -12,16 +12,14 @@ class XVM {
 
     function getLastPositions(){
         $recordSet=new db();
-        $rs=$recordSet->sqlQuery("select id,timestamp,latitud,longitud,velocidad,rumbo from equipos;");
+        $rs=$recordSet->sqlQuery("select id,timestamp,latitud,longitud,velocidad,rumbo from equipos");
         return $rs;
     }
 
-    function getLastPosition($id_virloc,$desde,$hasta,$cantidad=0){
-        //Devuelve las ultimas coordenadas de de reporte de un virloc
-        if($cantidad<>0){
-            $strCantidad="limit ".$cantidad;
-        }
-        return DB::sqlQuery("select id_virloc,id,fecha,latitud,longitud,velocidad,rumbo from cocido where id_virloc=".$id_virloc." and fecha between '$desde' and '$hasta' and longitud <> 0.0 and latitud <> 0.0 order by fecha desc ".$strCantidad);
+    function getLastPosition($id_virloc){
+    	$recordSet=new db();
+    	$rs=$recordSet->sqlQuery("select id,timestamp,latitud,longitud,velocidad,rumbo from equipos where id=".$id_virloc);
+    	return $rs;
     }
     
     function getScriptGoogleMapsApi($id_virloc,$latitud,$longitud){

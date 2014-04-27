@@ -2,12 +2,18 @@
 include "XVM.php";
 $html="";
 $script="";
-    $rs=XVM::getLastPositions();
-    while($pos=mysql_fetch_object($rs)){
-        $script.=XVM::getScriptGoogleMapsApi($pos->id,$pos->latitud,$pos->longitud);
-        $url=XVM::getGoogleMapsURL($pos->latitud,$pos->longitud);
-        $html.="<div id=map".$pos->id." style='width:400px; height:400px'></div>";
-    }
+
+if(isset($_GET["id_virloc"])){
+	$rs=XVM::getLastPosition($_GET["id_virloc"]);	
+}else{
+	$rs=XVM::getLastPositions();
+}
+
+while($pos=mysql_fetch_object($rs)){
+	$script.=XVM::getScriptGoogleMapsApi($pos->id,$pos->latitud,$pos->longitud);
+	$url=XVM::getGoogleMapsURL($pos->latitud,$pos->longitud);
+	$html.="<div id=map".$pos->id." style='width:400px; height:400px'></div>";
+}
 ?>
 
 <html>

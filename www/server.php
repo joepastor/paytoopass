@@ -8,9 +8,16 @@ function getEquipos() {
 	$datos = $db->sqlQuery ( "select * from equipos" );
 	$retorna = "";
 	$retorna .= "<table class='report_table'><caption>Cars</caption>";
-	$retorna .= "<tr><th>ID</th><th>Time</th><th>IP</th><th>Port</th><th>Position</th><th>Speed</th><th>Heading</th><th>Driver</th><th>Status</th></tr>";
+	$retorna .= "<tr><th>ID</th><th>Time</th><th>IP</th><th>Port</th><th>Position</th><th>Speed</th><th>Heading</th><th>Driver</th><th>Status</th><th>Map</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
-		$retorna .= "<tr><td>" . $a->id . "</td><td>" . $a->timestamp . "</td><td>" . $a->ip . "</td><td>" . $a->puerto . "</td><td>" . $a->latitud . "," . $a->longitud . "</td><td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td><td>" . $a->chofer . "</td><td>" . $a->estado . "</td>";
+		$retorna .= "<tr>
+						<td>" . $a->id . "</td><td>" . $a->timestamp . "</td>
+						<td>" . $a->ip . "</td><td>" . $a->puerto . "</td>
+						<td>" . $a->latitud . "," . $a->longitud . "</td>
+						<td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td>
+						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Map</td>
+					</tr>";
 	}
 	$retorna .= "</table>";
 	unset ( $db );
