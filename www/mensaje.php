@@ -10,7 +10,7 @@ $db = new db ();
 <?php
 if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!=""){
 	if($_POST["tipo"]=="pantalla"){
-		$mensaje="SSC26".$_POST["mensaje"];
+		$mensaje=$_POST["mensaje"];
 		$id=$_POST["virloc"]."V";
 	}else{
 		$mensaje=$_POST["mensaje"];
