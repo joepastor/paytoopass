@@ -9,15 +9,12 @@ $db = new db ();
 </head>
 <?php
 if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!=""){
+	$vircom=0;
 	if($_POST["tipo"]=="pantalla"){
-		$mensaje=$_POST["mensaje"];
-		$id=$_POST["virloc"]."V";
-	}else{
-		$mensaje=$_POST["mensaje"];
-		$id=$_POST["virloc"];
+		$vircom=1;
 	}
 	if($mensaje){
-		$db->sendMsg($id,$mensaje);
+		$db->sendMsg($_POST["virloc"],$_POST["mensaje"],$vircom);
 	}
 }
 ?>

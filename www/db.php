@@ -14,9 +14,9 @@ class db {
         $rs = mysql_query($sql);
         return $rs;
     }
-    function sendMsg($virloc,$mensaje){
+    function sendMsg($virloc,$mensaje,$vircom){
     	global $db;
-    	self::sqlQuery("insert into mensajes set mensaje='$mensaje',id_virloc='$virloc'");
+    	self::sqlQuery("insert into mensajes set mensaje='$mensaje',id_virloc='$virloc',vircom=$vircom");
     }
 }
 ?>
