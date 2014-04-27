@@ -79,7 +79,6 @@ while(1):
 		port = "4097"
 		addr = (host,port)
 
-	print(recv_data)
 	array=recv_data.split(";")
 	id_virloc=array[1].split("=")[1]
 	id_mensaje=array[2]

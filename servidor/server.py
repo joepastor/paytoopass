@@ -107,7 +107,7 @@ while(1):
 			ent=paquete[0][42:44]
 			numero_evento=paquete[0][44:46]
 			errorgps=paquete[0][46:48]
-			print "Fecha %s Hora GMT %s - Vehiculo %s - Tipo %s localizado en %s %s a %s kms/h con rumbo %s" % (fecha,hora,id_virloc,tipo,latitud,longitud,velocidad,rumbo)
+			#print "Fecha %s Hora GMT %s - Vehiculo %s - Tipo %s localizado en %s %s a %s kms/h con rumbo %s" % (fecha,hora,id_virloc,tipo,latitud,longitud,velocidad,rumbo)
 			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (id_virloc,host,port,latitud,longitud,velocidad,rumbo),'ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (host,port,latitud,longitud,velocidad,rumbo))
 
 			evento=info[44:46]
