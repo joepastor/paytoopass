@@ -65,13 +65,12 @@ while(1):
 				chofer=array[2].replace("-","")
 				tiempo=array[3].replace("-","")
 				distancia=array[4].replace("-","")
-				
-				if array[8]=="0":	
+				if array[7]=="0":	
 					print "COBRANDO en EFECTIVO"
 					monto=array[6].replace("-","")
-					cadena="fecha='%s',id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro='EFECTIVO',tiempo=%s,distancia=%s,estado='OK'" % (fecha,chofer,monto,id_virloc,tiempo,distancia)
+					cadena='fecha="%s",id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="EFECTIVO",tiempo=%s,distancia=%s,estado="OK"' % (fecha,chofer,monto,id_virloc,tiempo,distancia)
 				
-				if array[8]=="1":
+				if array[7]=="1":
 					print "COBRANDO con CUENTA CORRIENTE"
 					array=paquete[0].split(",")
 					cuenta=array[5].replace("-","")
@@ -79,7 +78,7 @@ while(1):
 					monto=array[7].replace("-","")
 					cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="CUENTA_CORRIENTE",tiempo=%s,distancia=%s,estado="-",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 
-				if array[8]=="2":
+				if array[7]=="2":
 					print "COBRANDO con WALLET"
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
