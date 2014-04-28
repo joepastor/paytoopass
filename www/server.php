@@ -16,7 +16,7 @@ function getEquipos() {
 						<td>" . $a->latitud . "," . $a->longitud . "</td>
 						<td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
-						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Position</a>&nbsp;<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a></td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Position</a>&nbsp;<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a><a>Mensaje</a></td>
 					</tr>";
 	}
 	$retorna .= "</table>";

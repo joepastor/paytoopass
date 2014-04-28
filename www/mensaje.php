@@ -24,7 +24,8 @@ Virloc:
 <?php 
 $datos = $db->sqlQuery ( "select id from equipos" );
 while ( $a = mysql_fetch_object ( $datos ) ) {
-	echo "<option value=".$a->id.">".$a->id."</option>";
+	$selected = ($_GET["virloc"] == $a->id) ? " selected" : "";
+	echo "<option value=".$a->id.$selected.">".$a->id."</option>";
 }
 ?>
 </select>
@@ -32,7 +33,7 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 <input type="radio" name="tipo" value="pantalla" checked>Screen</input>
 <input type="radio" name="tipo" value="interno">Core</input>
 <br>
-<textarea rows="3" cols="10" id="mensaje" name="mensaje"></textarea>
+<textarea rows="3" cols="20" id="mensaje" name="mensaje"></textarea>
 <br>
 <button>Enviar</button>
 </form>
