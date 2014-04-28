@@ -19,7 +19,6 @@
 
 
 from socket import *
-import os
 #from time import sleep
 from db import *
 from sys import argv
@@ -28,8 +27,6 @@ from XVM import *
 
 # Librerias solo utiles para el debugger
 from datetime import *
-
-os.system("clear")
 
 debug = 0
 if len(sys.argv) > 1:

@@ -6,12 +6,10 @@
 
 
 import select
-import os
 from time import sleep
 from XVM import *
 from db import *
 
-os.system("clear")
 DB = db()
 while(1):
 	sleep(1)

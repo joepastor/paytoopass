@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 import select
-import os
 from time import sleep
 from db import *
 from paytoo import *
 from XVM import *
 from encriptacion import desencriptar,getDecryptedCard
 
-os.system("clear")
 DB = db()
 xvm=XVM()
 
