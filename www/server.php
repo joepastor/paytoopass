@@ -16,7 +16,7 @@ function getEquipos() {
 						<td>" . $a->latitud . "," . $a->longitud . "</td>
 						<td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
-						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Map</td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Position</a>&nbsp;<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a></td>
 					</tr>";
 	}
 	$retorna .= "</table>";
@@ -31,7 +31,7 @@ function getCrudo() {
 	 */
 	$db = new db ();
 	$datos = $db->sqlQuery ( "select * from crudo order by fecha desc limit 20" );
-	$retorna = "<table id='crudo'><caption>Feed</caption>";
+	$retorna = "<table id='crudo' class='report_table'><caption>Feed</caption>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		if ($a->levantado == 0) {
 			$retorna .= "<tr class='bad_row'><td>" . $a->fecha . "</td><td>" . $a->info . "</td></tr>";

@@ -34,3 +34,9 @@ caption{
 table{
 	margin-top: 20px;
 }
+.div_map{
+	width: 300px;
+	height: 300px;
+	border: 1px solid;
+	box-shadow: 2px 2px 5px #999;
+}
