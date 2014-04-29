@@ -8,15 +8,15 @@ function getEquipos() {
 	$datos = $db->sqlQuery ( "select * from equipos" );
 	$retorna = "";
 	$retorna .= "<table class='report_table'><caption>Cars</caption>";
-	$retorna .= "<tr><th>ID</th><th>Time</th><th>IP</th><th>Port</th><th>Position</th><th>Speed</th><th>Heading</th><th>Driver</th><th>Status</th><th>Map</th></tr>";
+	$retorna .= "<tr><th>ID</th><th>Last Report</th><th>Host:Port</th><th>Position</th><th>Speed</th><th>Heading</th><th>Driver</th><th>Status</th><th>Map</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		$retorna .= "<tr>
 						<td>" . $a->id . "</td><td>" . $a->timestamp . "</td>
-						<td>" . $a->ip . "</td><td>" . $a->puerto . "</td>
-						<td>" . $a->latitud . "," . $a->longitud . "</td>
+						<td>" . $a->ip . ":" . $a->puerto . "</td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>" . $a->latitud . "," . $a->longitud . "</a></td>
 						<td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
-						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Position</a>&nbsp;<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a><a>Mensaje</a></td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a><a>Mensaje</a></td>
 					</tr>";
 	}
 	$retorna .= "</table>";
@@ -50,7 +50,7 @@ function getPagos() {
 	 */
 	$db = new db ();
 	$datos = $db->sqlQuery ( "select fecha,cuenta,id_chofer,monto,id_virloc,tipo_cobro,tiempo,distancia, estado,mensaje from pagos order by fecha desc limit 10" );
-	$retorna = "<table class='report_table'><caption>Pagos</caption>";
+	$retorna = "<table class='report_table'><caption>Payments</caption>";
 	$retorna .= "<tr><th>Time</th><th>Driver</th><th>Amount</th><th>ID</th><th>Method</th><th>Time</th><th>Distance</th><th>Status</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		switch ($a->estado){

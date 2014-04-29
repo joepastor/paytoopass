@@ -6,15 +6,20 @@ caption{
 .report_table{
 	font-size: 13px;
 	border: 1px solid;
-	width: 100%;
 }
 .report_table th{
 	background-color: #cccccc;
 	text-align: center;
 }
+.report_table tr{
+	border: 1px solid;
+}
+.report_table td{
+	border: 1px solid;
+}
 
 #crudo {
-	font-size: 10px;
+	font-size: 9px;
 	font-style: italic;
 	border: 1px solid;
 }
@@ -72,4 +77,17 @@ table{
 	background: -moz-linear-gradient(#fff, #999);
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999);
+}
+/* DIVS */
+#header{
+	width: 100%;
+	border-bottom: 1px solid navy;
+}
+#cars{
+	width: 670px;
+	float: left;
+}
+#feed{
+	width: 600px;
+	float: left;
 }
