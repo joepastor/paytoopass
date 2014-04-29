@@ -64,7 +64,7 @@ class XVM {
     	$var.="
         var myOptions = {
         	center: new google.maps.LatLng(".$latitud.",".$longitud."),
-        	zoom: 17,
+        	zoom: 13,
         	mapTypeId: google.maps.MapTypeId.ROADMAP
         };
     

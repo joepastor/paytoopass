@@ -6,6 +6,7 @@ caption{
 .report_table{
 	font-size: 13px;
 	border: 1px solid;
+	width: 100%;
 }
 .report_table th{
 	background-color: #cccccc;
@@ -13,6 +14,7 @@ caption{
 }
 .report_table tr{
 	border: 1px solid;
+	text-align: center;
 }
 .report_table td{
 	border: 1px solid;
@@ -82,12 +84,4 @@ table{
 #header{
 	width: 100%;
 	border-bottom: 1px solid navy;
-}
-#cars{
-	width: 670px;
-	float: left;
-}
-#feed{
-	width: 600px;
-	float: left;
 }

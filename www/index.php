@@ -6,7 +6,7 @@ include "server.php";
 <head>
 <title><?php echo date("H:i:s");?></title>
 </head>
-<!-- <meta http-equiv="refresh" content="1"> -->
+<meta http-equiv="refresh" content="10">
 <div id="header">
 <h1><img alt="PaytooPass" src="img/logo.png" width="60px">PAYTOO Pass - Testing Console</h1>
 </div>
@@ -18,7 +18,7 @@ include "server.php";
 </div>
 <?php
 echo getEquipos();
-echo getCrudo();
 echo getPagos();
+echo getCrudo();
 ?>
 </html>
