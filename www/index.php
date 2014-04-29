@@ -16,16 +16,9 @@ include "server.php";
 		<a href="#close" title="Close" class="close">X</a>
 	</div>
 </div>
-<div id="contenedor">
-	<div id="cars">
-	<?php echo getEquipos();?>
-	</div>
-	<div id="feed">
-	</div>
-</div>
 <?php
+echo getEquipos();
 echo getCrudo();
 echo getPagos();
 ?>
-<a href="#openModal">Open Modal</a>
 </html>

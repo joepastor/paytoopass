@@ -13,10 +13,10 @@ function getEquipos() {
 		$retorna .= "<tr>
 						<td>" . $a->id . "</td><td>" . $a->timestamp . "</td>
 						<td>" . $a->ip . ":" . $a->puerto . "</td>
-						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>" . $a->latitud . "," . $a->longitud . "</a></td>
+						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "'>Map</a>-<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a></td>
 						<td>" . $a->velocidad . " Kms/h</td><td>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
-						<td><a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'>Route</a><a>Mensaje</a></td>
+						<td><a href='#openModal'>Mensaje</a></td>
 					</tr>";
 	}
 	$retorna .= "</table>";
