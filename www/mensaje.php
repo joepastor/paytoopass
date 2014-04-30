@@ -40,7 +40,7 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 <input type="radio" name="tipo" value="virloc">Virloc</input>
                                                  
 <br>
-<textarea rows="3" cols="45" id="mensaje" name="mensaje"></textarea>
+<textarea rows="3" cols="45" id="mensaje" maxlength="94" name="mensaje"></textarea>
 <br>
 <button>Enviar</button>
 </form>
