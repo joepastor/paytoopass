@@ -15,7 +15,7 @@ if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!="")
 		$vircom=1;
 		if($_POST["tipo"]="pantalla"){
 			$largo=strlen($_POST["mensaje"]);
-			$mensaje="SMT1234567".str_pad($_POST["mensaje"],94);
+			$mensaje="SMT12345670".str_pad($_POST["mensaje"],94);
 		}
 	}
 	
