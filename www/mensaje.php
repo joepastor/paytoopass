@@ -10,11 +10,16 @@ $db = new db ();
 <?php
 if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!=""){
 	$vircom=0;
-	if($_POST["tipo"]=="pantalla"){
+	$mensaje=$_POST["mensaje"];
+	if($_POST["tipo"]=="vircom" || $_POST["tipo"]=="pantalla"){
 		$vircom=1;
+		if($_POST["tipo"]="pantalla"){
+			$largo=strlen($_POST["mensaje"]);
+			$mensaje="SMT1234567".str_pad($_POST["mensaje"],94);
+		}
 	}
-
-	$db->sendMsg($_POST["virloc"],$_POST["mensaje"],$vircom);
+	
+	$db->sendMsg($_POST["virloc"],$mensaje,$vircom);
 }
 ?>
 <body>
@@ -30,8 +35,9 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 ?>
 </select>
 <br>
-<input type="radio" name="tipo" value="pantalla" checked>Screen</input>
-<input type="radio" name="tipo" value="interno">Core</input>
+<input type="radio" name="tipo" value="vircom" checked>Vircom</input>
+<input type="radio" name="tipo" value="virloc">Virloc</input>
+<input type="radio" name="tipo" value="pantalla">Pantalla</input>                                                 
 <br>
 <textarea rows="3" cols="20" id="mensaje" name="mensaje"></textarea>
 <br>

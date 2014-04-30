@@ -22,3 +22,4 @@ echo getPagos();
 echo getCrudo();
 ?>
 </html>
+SMT12345670HOLA                                                                                          
