@@ -4,11 +4,12 @@ include "server.php";
 ?>
 <html>
 <head>
-<title><?php echo date("H:i:s");?></title>
+<title>PaytooPass - TEST</title>
 </head>
 <meta http-equiv="refresh" content="10">
 <div id="header">
-<h1><img alt="PaytooPass" src="img/logo.png" width="60px">PAYTOO Pass - Testing Console</h1>
+	<h1><img alt="PaytooPass" src="img/logo.png" width="60px">PAYTOO Pass - Testing Console</h1>
+	<div id="hora"><?php echo date("H:i:s");?></div>
 </div>
 <div id="openModal" class="modalDialog">
 	<div>
@@ -21,5 +22,4 @@ echo getEquipos();
 echo getPagos();
 echo getCrudo();
 ?>
-</html>
-SMT12345670HOLA                                                                                          
+</html>                                                                                          
