@@ -16,6 +16,7 @@ if(isset($_POST["virloc"]) && isset($_POST["mensaje"]) && $_POST["mensaje"]!="")
 		if($_POST["tipo"]="pantalla"){
 			$largo=strlen($_POST["mensaje"]);
 			$mensaje="SMT12345670".str_pad($_POST["mensaje"],94);
+			$mensaje=strtoupper($mensaje);
 		}
 	}
 	
