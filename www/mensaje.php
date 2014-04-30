@@ -35,12 +35,12 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 }
 ?>
 </select>
-<br>
-<input type="radio" name="tipo" value="vircom" checked>Vircom</input>
+<input type="radio" name="tipo" value="pantalla" checked>Pantalla</input>
+<input type="radio" name="tipo" value="vircom">Vircom</input>
 <input type="radio" name="tipo" value="virloc">Virloc</input>
-<input type="radio" name="tipo" value="pantalla">Pantalla</input>                                                 
+                                                 
 <br>
-<textarea rows="3" cols="20" id="mensaje" name="mensaje"></textarea>
+<textarea rows="3" cols="45" id="mensaje" name="mensaje"></textarea>
 <br>
 <button>Enviar</button>
 </form>
