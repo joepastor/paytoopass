@@ -34,8 +34,6 @@ while(1):
 		if tipo_cobro=='TARJETA':
 			print "Procesando %s : $ %s para la tarjeta %s" % (id,monto,cuenta)
 			
-			
-			
 			Customer = {
 			'email': 'jlopez.mail@gmail.com',
 			'firstname': 'Joe',
@@ -80,7 +78,6 @@ while(1):
 			print "La transaccion no pudo ser completada"
 			estado=request.status
 			mensaje=request.msg
-			xvm.sendDirectMsg(id_virloc,mensaje,1)
 				
 		if request.status=="PENDING":
 			print "Necesario confirmar"
