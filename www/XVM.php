@@ -1,5 +1,5 @@
 <?PHP
-include "db.php";
+include_once "db.php";
 class XVM {
     
     function __construct(){

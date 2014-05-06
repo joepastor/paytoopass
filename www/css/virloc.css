@@ -8,6 +8,13 @@ caption{
 	font-style: italic;
 	text-align: left;
 }
+h1{
+	text-align: center;
+}
+h2{
+	text-align: center;
+	font-size: 20px;
+}
 
 .report_table{
 	font-size: 13px;
@@ -89,6 +96,7 @@ table{
 	margin: 5px;
 	width: auto;
 	background-color: #fff;
+	cursor: pointer;
 }
 #hora{
 	font-family: monospace;
@@ -99,8 +107,9 @@ table{
 	font-size: 30px;
 }
 .div_map{
-	width: 900px;
-	height: 600px;
+	margin: 0px auto;
+	width: 800px;
+	height: 500px;
 	border: 1px solid;
 	box-shadow: 2px 2px 5px #999;
 }

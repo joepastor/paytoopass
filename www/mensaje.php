@@ -1,5 +1,5 @@
 <?php 
-include "header.php";
+
 include "server.php";
 $db = new db ();
 ?>
@@ -38,7 +38,6 @@ while ( $a = mysql_fetch_object ( $datos ) ) {
 <input type="radio" name="tipo" value="pantalla" checked>Pantalla</input>
 <input type="radio" name="tipo" value="vircom">Vircom</input>
 <input type="radio" name="tipo" value="virloc">Virloc</input>
-                                                 
 <br>
 <textarea rows="3" cols="45" id="mensaje" maxlength="94" name="mensaje"></textarea>
 <br>

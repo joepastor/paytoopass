@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include_once "db.php";
 
 // HelloServer.php
 // Copyright (c) 2005 by Dr. Herong Yang
