@@ -2,12 +2,24 @@
 include "XVM.php";
 $html="";
 $script="";
-$hasta=date("Y-m-d H:i:s");
-$desde=date("Y-m-d 00:00:00");
+if(isset($_GET["desde"])){
+	$desde=$_GET["desde"];
+}else{
+	$desde=date("Y-m-d 00:00:00");
+}
+if(isset($_GET["hasta"])){
+	$hasta=$_GET["hasta"];
+}else{
+	$hasta=date("Y-m-d H:i:s");
+}
+
+
 
 if(isset($_GET["id_virloc"])){
 	if(isset($_GET["route"])){
 		echo "RUTA";
+		echo $desde;
+		echo $hasta;
 		$mapa = XVM::getMapLastPositions($_GET["id_virloc"],$desde,$hasta);
 		$script=$mapa[0];
 		$html=$mapa[1];
