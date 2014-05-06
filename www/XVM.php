@@ -78,6 +78,8 @@ class XVM {
     	return $var;
     }
     function getMapLastPosition($id_virloc){
+    	$script="";
+    	$html="";
     	$rs=XVM::getLastPosition($_GET["id_virloc"]);
     	while($pos=mysql_fetch_object($rs)){
     		$script.=XVM::getMapPosition($pos->id,$pos->latitud,$pos->longitud);
