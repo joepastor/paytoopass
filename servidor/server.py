@@ -50,14 +50,7 @@ while(1):
 				else:
 					print "Chofer NO HABILITADO"
 					
-			if info[4:6]=="02":
-				# Pago con tarjeta, wallet o efectivo
-				# El array, 8tava posición es 
-				# 0 - Efectivo
-				# 1 - Cuenta Corriente
-				# 2 - Wallet
-				# 3 - Tarjeta
-				
+			if info[4:6]=="02":				
 				# Valores para todos los metodos de pago
 				fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
 				chofer=array[2].replace("-","")
@@ -75,13 +68,6 @@ while(1):
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
 					cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="CUENTA_CORRIENTE",tiempo=%s,distancia=%s,estado="-",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
-
-				if array[7]=="2":
-					print "COBRANDO con WALLET"
-					cuenta=array[5].replace("-","")
-					password=array[6].replace("-","")
-					monto=array[7].replace("-","")
-					cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 
 				DB.sqlInsert("pagos",cadena)
 				estado="EN SERVICIO"
@@ -101,6 +87,20 @@ while(1):
 				monto=array[7].replace("-","")
 				cadena='fecha="%s",cuenta="%s",id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="TARJETA",tiempo=%s,distancia=%s,estado="PENDING",password=%s' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 				DB.sqlInsert('pagos',cadena)
+
+			if info[4:6]=="04":
+				print "COBRANDO con WALLET"
+				fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
+				chofer=array[2].replace("-","")
+				tiempo=array[3].replace("-","")
+				distancia=array[4].replace("-","")				
+				cuenta=array[5].replace("-","")
+				password=array[6].replace("-","")
+				monto=array[7].replace("-","")
+				cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,id_virloc=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+				DB.sqlInsert("pagos",cadena)
+				estado="EN SERVICIO"
+				DB.sqlInsertOrUpdate('equipos','id=%s,estado="%s"' % (id_virloc,estado),'estado="%s"' % estado)
 
 
 		if info[0:4]==">RGP" or info[0:4]==">RTT":
