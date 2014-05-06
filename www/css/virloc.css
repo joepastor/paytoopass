@@ -1,6 +1,6 @@
 /* Elementos */
 body{
-	background-color: #f9f9f9;
+	background-color: #e0e0e0;
 }
 
 caption{
@@ -14,6 +14,7 @@ caption{
 	border: 1px solid;
 	width: 95%;
 	margin: 0px auto;
+	background-color: #fff;
 }
 .report_table th{
 	background-color: #cccccc;
@@ -90,7 +91,7 @@ table{
 	background-color: #fff;
 }
 #hora{
-	font-family: fantasy;
+	font-family: monospace;
 	float: right;
 	position: absolute;
 	top: 10px;
