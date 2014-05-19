@@ -47,7 +47,7 @@ while(1):
 			}
 
 
-			CreditCard = getDecryptedCard(cuenta,'000')
+			#CreditCard = getDecryptedCard(cuenta,'000')
 			CreditCard = getCard(cuenta,'000')	
 			print CreditCard
 					
