@@ -47,7 +47,8 @@ while(1):
 			}
 
 
-			CreditCard = getDecryptedCard(cuenta,'000')	
+			CreditCard = getDecryptedCard(cuenta,'000')
+			CreditCard = getCard(cuenta,'000')	
 			print CreditCard
 					
 			CreditCard = {
@@ -97,7 +98,6 @@ while(1):
 				else:
 					xvm.sendMsgToQueue(id_virloc,'SSC27',1)
 					print "La transaccion no pudo ser confirmada"
-					#xvm.enviarMensaje(id_virloc,"SMT0000000%s" % request2.msg,1)
 					DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
 					xvm.sendMsgToQueue(id_virloc,'SMT0000000%s' % request2.msg,1)
 			else:
