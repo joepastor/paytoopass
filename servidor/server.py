@@ -53,14 +53,14 @@ while(1):
 						
 				if info[4:6]=="02":				
 					# Valores para todos los metodos de pago
-					fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
+					#fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
 					chofer=array[2].replace("-","")
 					tiempo=array[3].replace("-","")
 					distancia=array[4].replace("-","")
 					if array[7]=="0":	
 						print "COBRANDO en EFECTIVO"
 						monto=array[6].replace("-","")
-						cadena='fecha="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="EFECTIVO",tiempo=%s,distancia=%s,estado="OK"' % (fecha,chofer,monto,id_virloc,tiempo,distancia)
+						cadena='id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="EFECTIVO",tiempo=%s,distancia=%s,estado="OK"' % (chofer,monto,id_virloc,tiempo,distancia)
 					
 					if array[7]=="1":
 						print "COBRANDO con CUENTA CORRIENTE"
@@ -68,7 +68,7 @@ while(1):
 						cuenta=array[5].replace("-","")
 						password=array[6].replace("-","")
 						monto=array[7].replace("-","")
-						cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="CUENTA_CORRIENTE",tiempo=%s,distancia=%s,estado="-",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+						cadena='cuenta=%s,id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="CUENTA_CORRIENTE",tiempo=%s,distancia=%s,estado="-",password="%s"' % (cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 	
 					DB.sqlInsert("pagos",cadena)
 					estado="EN SERVICIO"
@@ -79,26 +79,26 @@ while(1):
 					# if array[8]=="3": Se supone que en esta posicion del array tambien viene un 3
 					# Pero para evitar inconvenientes, nos manejamos solo con el rus03 
 					print "COBRANDO con TARJETA"
-					fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
+					#fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
 					chofer=array[2].replace("-","")
 					tiempo=array[3].replace("-","")
 					distancia=array[4].replace("-","")
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
-					cadena='fecha="%s",cuenta="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="TARJETA",tiempo=%s,distancia=%s,estado="PENDING",password=%s' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+					cadena='cuenta="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="TARJETA",tiempo=%s,distancia=%s,estado="PENDING",password=%s' % (cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 					DB.sqlInsert('pagos',cadena)
 	
 				if info[4:6]=="04":
 					print "COBRANDO con WALLET"
-					fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
+					#fecha="20%s-%s-%s %s:%s:%s" % (array[1][4:6],array[1][2:4],array[1][0:2],array[1][6:8],array[1][8:10],array[1][10:12])
 					chofer=array[2].replace("-","")
 					tiempo=array[3].replace("-","")
 					distancia=array[4].replace("-","")				
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
-					cadena='fecha="%s",cuenta="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+					cadena='cuenta="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 					DB.sqlInsert("pagos",cadena)
 					estado="EN SERVICIO"
 					DB.sqlInsertOrUpdate('equipos','id=%s,estado="%s"' % (id_virloc,estado),'estado="%s"' % estado)
@@ -111,7 +111,7 @@ while(1):
 				tipo=paquete[0][1:4]
 				fecha=paquete[0][4:10]
 				hora=paquete[0][10:16]
-				datetime="20%s-%s-%s %s:%s:%s" % (fecha[4:6],fecha[2:4],fecha[0:2],hora[0:2],hora[2:4],hora[4:6])
+				#datetime="20%s-%s-%s %s:%s:%s" % (fecha[4:6],fecha[2:4],fecha[0:2],hora[0:2],hora[2:4],hora[4:6])
 				latitud=float(paquete[0][16:24])/100000
 				longitud=float(paquete[0][24:33])/100000
 				velocidad=paquete[0][33:36]

@@ -5,7 +5,7 @@
  <html>
 <head>
 <title>PaytooPass - TEST</title>
-<meta http-equiv="refresh" content="1">
+<meta http-equiv="refresh" content="3">
 </head>
  <!-- Bootstrap -->
  <link href="css/bootstrap.min.css" rel="stylesheet">
