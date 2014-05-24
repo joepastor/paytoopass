@@ -55,7 +55,7 @@ class XVM:
 	def getIDMensaje(self):
 		DB = db()
 		d = DB.sqlSelect("max(id_mensaje) as id_mensaje", "mensajes", "")
-		id_respuesta = 1
+		id_respuesta = 8000
 		for id_mensaje in d.fetchone():
 			if id_mensaje:
 				if id_mensaje + 1 != 65535:

@@ -46,9 +46,11 @@ while(1):
 				'level': ''
 				}
 	
-	
-				#CreditCard = getDecryptedCard(cuenta,'000')
-				CreditCard = getCard(cuenta,'000')	
+				if id_virloc == "5000":
+					CreditCard = getDecryptedCard(cuenta,'000')
+				else:
+					CreditCard = getCard(cuenta,'000')	
+
 				print CreditCard
 						
 				CreditCard = {
