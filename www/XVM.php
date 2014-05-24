@@ -21,7 +21,7 @@ class XVM {
     }
     function getLastPositions($id_virloc,$desde,$hasta){
     	$recordSet=new db();
-    	$sql="select id_virloc,fecha,latitud,longitud,velocidad,rumbo from posiciones where id_virloc=".$id_virloc." and fecha between '".$desde."' and '".$hasta."'";
+    	$sql="select id_virloc,fecha,latitud,longitud,velocidad,rumbo from posiciones where equipos_id=".$id_virloc." and fecha between '".$desde."' and '".$hasta."'";
     	$rs=$recordSet->sqlQuery($sql);
     	return $rs;
     }
