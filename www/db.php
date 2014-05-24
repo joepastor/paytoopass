@@ -16,7 +16,7 @@ class db {
     }
     function sendMsg($virloc,$mensaje,$vircom){
     	global $db;
-    	self::sqlQuery("insert into mensajes set mensaje='$mensaje',id_virloc='$virloc',vircom=$vircom");
+    	self::sqlQuery("insert into mensajes set mensaje='$mensaje',equipos_id='$virloc',vircom=$vircom");
     }
 }
 ?>
