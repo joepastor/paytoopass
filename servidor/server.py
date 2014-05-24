@@ -98,7 +98,7 @@ while(1):
 					cuenta=array[5].replace("-","")
 					password=array[6].replace("-","")
 					monto=array[7].replace("-","")
-					cadena='fecha="%s",cuenta=%s,id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
+					cadena='fecha="%s",cuenta="%s",id_chofer=%s,monto=%s,equipos_id=%s,tipo_cobro="WALLET",tiempo=%s,distancia=%s,estado="PENDING",password="%s"' % (fecha,cuenta,chofer,monto,id_virloc,tiempo,distancia,password)
 					DB.sqlInsert("pagos",cadena)
 					estado="EN SERVICIO"
 					DB.sqlInsertOrUpdate('equipos','id=%s,estado="%s"' % (id_virloc,estado),'estado="%s"' % estado)
