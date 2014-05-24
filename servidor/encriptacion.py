@@ -54,7 +54,6 @@ def getDecryptedCard(cadena,pin):
 
     stream=desencriptar(cadena)
     print stream
-    print stream[2:3]
     tipo_tarjeta=stream[2:3]
     if tipo_tarjeta == "3":
         card="AMEX"
