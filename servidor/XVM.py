@@ -96,7 +96,7 @@ class XVM:
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
 		DB = db()
-		d = DB.sqlSelect("mensaje, equipos_id,vircom", "mensajes", "id=%s" % id)
+		d = DB.sqlSelect("mensaje, equipos_id ,vircom", "mensajes", "id=%s" % id)
 		for mensaje, id_virloc,vircom in d.fetchall():
 			# Calculo el id de mensaje que debo asignar
 			id_mensaje = self.getIDMensaje()
