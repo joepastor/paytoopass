@@ -4,7 +4,7 @@ from time import sleep
 from db import *
 from paytoo import *
 from XVM import *
-from encriptacion import desencriptar,getDecryptedCard
+from encriptacion import desencriptar,getDecryptedCard,getCard
 
 DB = db()
 xvm=XVM()
