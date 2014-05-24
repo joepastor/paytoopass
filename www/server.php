@@ -54,7 +54,7 @@ function getPagos() {
 	 * Crude information about the data on the database. $fecha - datetimeformat of the time
 	 */
 	$db = new db ();
-	$datos = $db->sqlQuery ( "select fecha,cuenta,id_chofer,monto,id_virloc,tipo_cobro,tiempo,distancia, estado,mensaje from pagos order by fecha desc limit 10" );
+	$datos = $db->sqlQuery ( "select fecha,cuenta,id_chofer,monto,equipos_id,tipo_cobro,tiempo,distancia, estado,mensaje from pagos order by fecha desc limit 10" );
 	$retorna = "<table class='report_table'><caption>Payments</caption>";
 	$retorna .= "<tr><th>Time</th><th>Driver</th><th>Amount</th><th>ID</th><th>Method</th><th>Time</th><th>Distance</th><th>Status</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
@@ -76,7 +76,7 @@ function getPagos() {
 		//$retorna .= "<td>" . $a->cuenta . "</td>";
 		$retorna .= "<td>" . $a->id_chofer . "</td>";
 		$retorna .= "<td>" . $a->monto . "</td>";
-		$retorna .= "<td>" . $a->id_virloc . "</td>";
+		$retorna .= "<td>" . $a->equipos_id . "</td>";
 		$retorna .= "<td>" . $a->tipo_cobro . "</td>";
 		$retorna .= "<td>" . $a->tiempo . "</td>";
 		$retorna .= "<td>" . $a->distancia . "</td>";

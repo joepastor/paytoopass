@@ -82,9 +82,11 @@ def getCard(cadena,pin):
     # 4 visa
     # 5 mastercard
     # 6 Discover
-
+    
+    cadena=cadena[1:len(cadena)] # Esto lo hacemos porque luego de utilizar la desencriptacion viene un espacio al principio del string y debemos eliminarlo.
     stream=cadena
     print stream
+
     print stream[2:3]
     tipo_tarjeta=stream[2:3]
     if tipo_tarjeta == "3":

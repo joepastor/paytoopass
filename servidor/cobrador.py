@@ -4,7 +4,7 @@ from time import sleep
 from db import *
 from paytoo import *
 from XVM import *
-from encriptacion import desencriptar,getDecryptedCard
+from encriptacion import desencriptar,getDecryptedCard,getCard
 
 DB = db()
 xvm=XVM()
@@ -18,7 +18,7 @@ while(1):
 	sleep(1)
 	try:
 		# Comienzo a consultar todos los movimientos que no han sido procesados
-		rs = DB.sqlSelect('id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password','pagos','estado="PENDING"')
+		rs = DB.sqlSelect('id,cuenta,id_chofer,monto,tipo_cobro,equipos_id,password','pagos','estado="PENDING"')
 		restantes=rs.rowcount
 	
 		for id,cuenta,id_chofer,monto,tipo_cobro,id_virloc,password in rs.fetchall():

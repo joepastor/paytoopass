@@ -91,7 +91,7 @@ class XVM:
 		id_mensaje_hex = hex(int(id_mensaje)).replace("0x","").zfill(4)
 		
 		DB = db()
-		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", id_virloc=%s,vircom=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc,vircom))
+		DB.sqlInsert('mensajes', 'id_mensaje=%s,id_mensaje_hex="%s",mensaje="%s", equipos_id=%s,vircom=%s' % (id_mensaje, id_mensaje_hex, mensaje, id_virloc,vircom))
 
 	def sendQueuedMsg(self,id):
 		# ID - es el id de la tabla mensajes. mensajes.id
