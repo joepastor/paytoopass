@@ -21,7 +21,7 @@ function getEquipos() {
 							" . $a->velocidad . " Kms/h <img style='transform: -moz-transform: rotate(" . $a->rumbo . "deg);
    								-webkit-transform: rotate(" . $a->rumbo . "deg);' title='Heading' src='img/flecha.png' width='16px'>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
-						<td><a href='#openModal'><img src='img/mail.png' width='32px'></a></td>
+						<td><a href='mensaje.php?virloc=$a->id' target='_blank'><img src='img/mail.png' width='32px'></a></td>
 					</tr>";
 	}
 	$retorna .= "</table>";
