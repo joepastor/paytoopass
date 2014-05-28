@@ -69,55 +69,35 @@ class PaytooCreditCardType {
 
 try {
 	ini_set ( 'soap.wsdl_cache_enabled', 0 );
-	$soap = new SoapClient ( "https://merchant.paytoo.info/api/merchant/?wsdl", array (
+	$soap = new SoapClient ( "https://go.paytoo.info/api/merchant/", array (
 			"classmap" => array (
 					"PaytooAccountType" => "PaytooAccountType",
 					"PaytooCreditCardType" => "PaytooCreditCardType" 
 			) 
 	) );
-	$merchant_id = '97383913'; // Your merchant ID
+	$merchant_id = 97383913; // Your merchant ID
 	$api_password = 'testing'; // Your API Password
 
-	$response = $soap->auth ( $merchant_id, $api_password );
-	if ($response->status == 'OK') {
-		echo "Connected\n";
-		
-		$CreditCard = new PaytooCreditCardType ();
-		$CreditCard->cc_type = "VISA"; // mandatory
-		$CreditCard->cc_holder_name = "DEMO	USER"; // mandatory
-		$CreditCard->cc_number = "4444333322221111"; // mandatory
-		$CreditCard->cc_cvv = "123"; // mandatory
-		$CreditCard->cc_month = "12"; // mandatory
-		$CreditCard->cc_year = "14"; // mandatory
-		$Customer = new PaytooAccountType ();
-		$Customer->email = "testing@user.com"; // mandatory
-		$Customer->firstname = "Demo"; // mandatory
-		$Customer->lastname = "User"; // mandatory
-		$Customer->address = "200	SW	1st	Avenue";
-		$Customer->city = "Fort	Lauderdale";
-		$Customer->zipcode = "33301";
-		$Customer->state = "FL";
-		$Customer->country = "US";
-		$amount = 6.00; // mandatory
-		$currency = 'USD'; // mandatory
-		
-		echo "Processing	Credit	Card	Sale\n";
-		$ref_id = rand ( 1000, 9999 ); // mandatory
-		$description = "Order	#" . $ref_id . "	with	Paytoo	Merchant";
-		$addinfo = "";
-		$response = $soap->CreditCardSingleTransaction ( $CreditCard, $Customer, $amount, $currency, $ref_id, $description );
-		if ($response->status == 'OK') {
-			echo "Transaction	has	been	processed\n";
-			echo "Request	ID:	" . $response->request_id . "\n";
-			echo "Tr.	ID:	" . $response->tr_id . "\n";
+	
+	echo "Processing	Wallet	Sale\n";
+	$response = $soap->SingleTransaction ( '01109123', 123456, 13, 'USD', '1234', 'Order	1234' );
+	if ($response->status == 'PENDING') {
+		echo "Step	2a:	Transaction	accepted	but	it	must	be	confirmed\n";
+		echo "Request	ID:	" . $response->request_id . "\n";
+		$request_id = $response->request_id;
+		// OTP is always 888888 on sandbox
+		$response2 = $soap->ConfirmTransaction ( $request_id, 888888 );
+		if ($response2->status == 'OK') {
+			echo "Finish:	transaction	has	been	processed\n";
+			echo "Tr.	ID:	" . $response2->tr_id . "\n";
 		} else {
-			echo $response->status . "	-	" . $response->msg . "\n";
+			echo "ConfirmTransaction	error:	" . $response2->status . "	-	" . $response2->msg . "\n";
 		}
-		
-		$soap->logout ();
-		echo "Logout\n";
+	} elseif ($response->status == 'OK') {
+		echo "Finish:	transaction	has	been	processed\n";
+		echo "Tr.	ID:	" . $response->tr_id . "\n";
 	} else {
-		echo "Auth	error:	" . $response->status . "	-	" . $response->msg . "\n";
+		echo "SingleTransaction	error:	" . $response->status . "	-	" . $response->msg . "\n";
 	}
 } catch ( Exception $e ) {
 	var_export ( $e );

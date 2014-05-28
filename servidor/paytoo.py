@@ -9,14 +9,14 @@ class paytoo:
 	url = 'https://go.paytoo.info/api/merchant/?wsdl'
 	merchant_id = '97383913'
 	api_password = 'testing'
-	
+	security_code = '777777' # Este codigo lo paso Michel. No sabemos exactamente que es, pero no es el codigo SMS
 	def cobrarWallet(self,importe,cliente,password):
 		print "Cobrando con wallet - %s al cliente %s:%s" % (importe,cliente,password)
 		proxy = SOAPpy.WSDL.Proxy(self.url)
 		token = proxy.auth(self.merchant_id, self.api_password)
 		
 		#response = proxy.SingleTransaction(cliente.zfill(8), '539482', importe, 'ARS', '1234', 'Order 1234');
-		response = proxy.SingleTransaction(cliente.zfill(8), '123456', float(importe), 'USD', '1234', 'Order 1234');
+		response = proxy.SingleTransaction(cliente.zfill(8), security_code, float(importe), 'USD', '1234', 'Order 1234');
 
 		print "ID: %s" % response.request_id
 		proxy.logout()
