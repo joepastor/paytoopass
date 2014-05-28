@@ -96,11 +96,11 @@ while(1):
 					if request2.status=="OK":
 						xvm.sendMsgToQueue(id_virloc,'SSC26',1)
 						print "Confirmacion COMPLETADA"
-						DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
+						DB.sqlUpdate('pagos','estado="%s",mensaje="%s"' % (request2.status,request2.msg),'id=%s' % id)
 					else:
 						xvm.sendMsgToQueue(id_virloc,'SSC27',1)
 						print "La transaccion no pudo ser confirmada"
-						DB.sqlUpdate("pagos","estado='%s',mensaje='%s'" % (request2.status,request2.msg),"id=%s" % id)
+						DB.sqlUpdate('pagos','estado="%s",mensaje="%s"' % (request2.status,request2.msg),'id=%s' % id)
 						xvm.sendMsgToQueue(id_virloc,'SMT0000000%s' % request2.msg,1)
 				else:
 					estado="TOSIGN"
