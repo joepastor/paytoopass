@@ -45,8 +45,8 @@ while(1):
 				'country': 'AR',
 				'level': ''
 				}
-	
-				if id_virloc == "5000":
+
+				if id_virloc == 5000:
 					CreditCard = getDecryptedCard(cuenta,'000')
 				else:
 					CreditCard = getCard(cuenta,'000')	

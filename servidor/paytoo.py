@@ -17,6 +17,7 @@ class paytoo:
 		
 		#response = proxy.SingleTransaction(cliente.zfill(8), '539482', importe, 'ARS', '1234', 'Order 1234');
 		response = proxy.SingleTransaction(cliente.zfill(8), '123456', float(importe), 'USD', '1234', 'Order 1234');
+
 		print "ID: %s" % response.request_id
 		proxy.logout()
 		return response
