@@ -30,15 +30,6 @@ while(1):
 			if tipo_cobro=='WALLET':
 				print "Procesando %s : $ %s para la Wallet %s" % (id,monto,cuenta)
 				request=transaccion.cobrarWallet(monto,cuenta,password)
-				print request
-				if request.status=="TOSIGN":
-					response2=transaccion.confirmar(response.request_id,password)
-					print response2
-					if response2.status == "OK":
-						print "TODO GUEY MAN"
-					else:
-						print response2.status
-						print response2.msg
 	
 			if tipo_cobro=='TARJETA':
 				print "Procesando %s : $ %s para la tarjeta %s" % (id,monto,cuenta)
@@ -94,8 +85,8 @@ while(1):
 			if request.status=="PENDING":
 				print "Necesario confirmar"
 				xvm.sendMsgToQueue(id_virloc,'SSC26',1)
-				if tipo_cobro=='TARJETA_PREAUTH':
-					print "Intentando confirmar"
+				if tipo_cobro=='TARJETA_PREAUTH' or tipo_cobro=='WALLET':
+					print "Intentando confirmar %s " % tipo_cobro
 					request2 = transaccion.confirmar(request.request_id,password)
 					estado=request2.status
 					mensaje=request2.msg
