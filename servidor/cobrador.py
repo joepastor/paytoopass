@@ -30,6 +30,15 @@ while(1):
 			if tipo_cobro=='WALLET':
 				print "Procesando %s : $ %s para la Wallet %s" % (id,monto,cuenta)
 				request=transaccion.cobrarWallet(monto,cuenta,password)
+				print request
+				if request.status=="TOSIGN":
+					response2=transaccion.confirmar(response.request_id,password)
+					print response2
+					if response2.status == "OK":
+						print "TODO GUEY MAN"
+					else:
+						print response2.status
+						print response2.msg
 	
 			if tipo_cobro=='TARJETA':
 				print "Procesando %s : $ %s para la tarjeta %s" % (id,monto,cuenta)
