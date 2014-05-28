@@ -13,15 +13,15 @@ class db:
 
 	def __ejecutar(self,sql):
 		sql=sql.replace("'","")
-		print sql
 		try:
 			self.curs.execute(sql)
 			self.dataBase.commit()
 			return self.curs
 		except MySQLdb.Error,e:
-			print "-" * 50
+			print "ERROR " * 50
+			print sql
 			print e
-			print "-" * 50
+			print "ERROR " * 50
 			return e
 
 	def sqlInsertOrUpdate(self, tabla, campos, update):
