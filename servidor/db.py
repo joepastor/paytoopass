@@ -18,10 +18,10 @@ class db:
 			self.dataBase.commit()
 			return self.curs
 		except MySQLdb.Error,e:
-			print "ERROR " * 50
+			print "ERROR " * 8
 			print sql
 			print e
-			print "ERROR " * 50
+			print "ERROR " * 8
 			return e
 
 	def sqlInsertOrUpdate(self, tabla, campos, update):
