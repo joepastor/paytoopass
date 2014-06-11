@@ -31,6 +31,8 @@ while(1):
 			
 	
 			# Actualizo los datos del equipo
+			if id_virloc[-1:]=="V":
+				id_virloc=id_virloc[:-1]
 			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
 			array=paquete[0].split(",")
 			print info
