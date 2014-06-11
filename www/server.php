@@ -3,6 +3,34 @@ include_once "db.php";
 
 // HelloServer.php
 // Copyright (c) 2005 by Dr. Herong Yang
+function getMensajes() {
+	$db = new db ();
+	/*
+	 * Crude information about the data on the database. $fecha - datetimeformat of the time
+	*/
+	$db = new db ();
+	$datos = $db->sqlQuery ( "select * from mensajes order by timestamp desc limit 20" );
+	$retorna = "<table id='mensajes' class='report_table'><caption>Messages</caption>";
+	$retorna .= "<tr><th>Date</th><th>ID</th><th>Message ID</th><th>Message</th><th>Sent</th><th>Delivered</th><th>Received</th><th>Read</th></tr>";
+	while ( $a = mysql_fetch_object ( $datos ) ) {
+		if ($a->recibido == 0) {
+			$retorna .= "<tr class='bad_row'>";
+		} else {
+			$retorna .= "<tr class='ok_row'>";
+		}
+		$retorna.="<td>".$a->timestamp."</td>";
+		$retorna.="<td>".$a->equipos_id."</td>";
+		$retorna.="<td>".$a->id_mensaje."</td>";
+		$retorna.="<td>".$a->mensaje."</td>";
+		$retorna.="<td>".$a->enviado."</td>";
+		$retorna.="<td>".$a->entregado."</td>";
+		$retorna.="<td>".$a->recibido."</td>";
+		$retorna.="<td>".$a->leido."</td>";
+		$retorna.="</tr>";
+	}
+	$retorna .= "</table>";
+	return $retorna;
+}
 function getEquipos() {
 	$db = new db ();
 	$datos = $db->sqlQuery ( "select * from equipos" );

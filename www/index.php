@@ -2,6 +2,7 @@
 
 echo getEquipos();
 echo getPagos();
+echo getMensajes();
 echo getCrudo();
 ?>
 </html>                                                                                          
