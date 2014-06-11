@@ -63,6 +63,9 @@ while(1):
             	UDPSock.bind(('',4097))
             	UDPSock.sendto(respuesta,addr)
             	UDPSock.close()
+            else:
+                print "update mensajes set recibido=1 where id_mensaje=%s" % array[2]
+                DB.sqlUpdate('mensajes','recibido=1','id_mensaje=%s' % array[2])
     	else:
     		print " ¡ERROR DE CHECKSUM! " * 3
     
