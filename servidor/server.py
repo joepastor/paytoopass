@@ -28,8 +28,8 @@ while(1):
 			nromensaje=paquete[2]
 			checksum=paquete[3]
 			
-			energia_int = paquete[0][-4:]
-			energia_ext = paquete[0][-8:-4]
+			energia_ext = paquete[0][-4:]
+			energia_int = paquete[0][-8:-4]
 	
 			# Actualizo los datos del equipo
 			if id_virloc[-1:]=="V":

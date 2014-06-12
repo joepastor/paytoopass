@@ -45,10 +45,8 @@ function getEquipos() {
 				$img_bat="battery_full.png";
 			}
 		}
-		if($a->energia_ext !=NULL && $a->energia_ext > 400){
-			$energia_ext="AC";
-		}else{
-			$energia_ext="Battery";
+		if($a->energia_ext !=NULL && $a->energia_ext > 0){
+			$img_bat="battery_charging.png";
 		}
 		
 		$retorna .= "<tr>
