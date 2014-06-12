@@ -61,7 +61,7 @@ function getEquipos() {
    								-webkit-transform: rotate(" . $a->rumbo . "deg);' title='Heading' src='img/flecha.png' width='16px'>" . $a->rumbo . "&deg;</td>
 						<td>" . $a->chofer . "</td>
 						<td>" . $a->estado . "</td>
-						<td><img src='img/".$img_bat."' width='48px'>" . $energia_ext . "</td>
+						<td><img src='img/".$img_bat."' width='48px'></td>
 						<td><a href='mensaje.php?virloc=$a->id' target='_blank'><img src='img/mail.png' width='32px'></a></td>
 					</tr>";
 	}
