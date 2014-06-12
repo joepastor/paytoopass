@@ -11,21 +11,22 @@ function getMensajes() {
 	$db = new db ();
 	$datos = $db->sqlQuery ( "select * from mensajes order by timestamp desc limit 20" );
 	$retorna = "<table id='mensajes' class='report_table'><caption>Messages</caption>";
-	$retorna .= "<tr><th>Date</th><th>ID</th><th>Message ID</th><th>Message</th><th>Sent</th><th>Delivered</th><th>Received</th><th>Read</th></tr>";
+	$retorna .= "<tr><th>Date</th><th>ID</th><th>Message ID</th><th>Message</th><th>Sent</th><th>Received</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		if ($a->recibido == 0) {
 			$retorna .= "<tr class='bad_row'>";
 		} else {
 			$retorna .= "<tr class='ok_row'>";
 		}
+		$img_enviado=$a->enviado ==1 ? "ok.gif" : "error.png";
+		$img_recibido=$a->recibido ==1 ? "ok.gif" : "error.png";
+		
 		$retorna.="<td>".$a->timestamp."</td>";
 		$retorna.="<td>".$a->equipos_id."</td>";
 		$retorna.="<td>".$a->id_mensaje."</td>";
 		$retorna.="<td>".$a->mensaje."</td>";
-		$retorna.="<td>".$a->enviado."</td>";
-		$retorna.="<td>".$a->entregado."</td>";
-		$retorna.="<td>".$a->recibido."</td>";
-		$retorna.="<td>".$a->leido."</td>";
+		$retorna.="<td><img src='img/".$img_enviado."' width='24px'></td>";
+		$retorna.="<td><img src='img/".$img_recibido."' width='24px'></td>";
 		$retorna.="</tr>";
 	}
 	$retorna .= "</table>";
