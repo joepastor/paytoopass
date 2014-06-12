@@ -34,7 +34,7 @@ while(1):
 			# Actualizo los datos del equipo
 			if id_virloc[-1:]=="V":
 				id_virloc=id_virloc[:-1]
-			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,energia_int="%s",energia_ext="%s"' % (id_virloc,host,port,energia_int,energia_ext),'ip="%s",puerto=%s,energia_int="%s",energia_ext="%s"' % (host,port,energia_int,energia_ext))
+			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
 			array=paquete[0].split(",")
 			print info
 			# Selecciono el tipo de paquete
@@ -125,7 +125,7 @@ while(1):
 				numero_evento=paquete[0][44:46]
 				errorgps=paquete[0][46:48]
 				#print "Fecha %s Hora GMT %s - Vehiculo %s - Tipo %s localizado en %s %s a %s kms/h con rumbo %s" % (fecha,hora,id_virloc,tipo,latitud,longitud,velocidad,rumbo)
-				DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (id_virloc,host,port,latitud,longitud,velocidad,rumbo),'ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (host,port,latitud,longitud,velocidad,rumbo))
+				DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s,energia_int="%s",energia_ext="%s"' % (id_virloc,host,port,latitud,longitud,velocidad,rumbo,energia_int,energia_ext),'ip="%s",puerto=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s,energia_int="%s",energia_ext="%s"' % (host,port,latitud,longitud,velocidad,rumbo,energia_int,energia_ext))
 				DB.sqlInsert('posiciones','equipos_id=%s,host="%s",port=%s,latitud="%s",longitud="%s",velocidad=%s,rumbo=%s' % (id_virloc,host,port,latitud,longitud,velocidad,rumbo))
 	
 				evento=info[44:46]
