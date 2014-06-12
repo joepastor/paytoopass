@@ -27,13 +27,14 @@ while(1):
 			id_virloc=paquete[1].replace("ID=","")
 			nromensaje=paquete[2]
 			checksum=paquete[3]
-	
 			
+			energia_int = paquete[0][-4:]
+			energia_ext = paquete[0][-8:-4]
 	
 			# Actualizo los datos del equipo
 			if id_virloc[-1:]=="V":
 				id_virloc=id_virloc[:-1]
-			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s' % (id_virloc,host,port),'ip="%s",puerto=%s' % (host,port))
+			DB.sqlInsertOrUpdate('equipos','id=%s,ip="%s",puerto=%s,energia_int="%s",energia_ext="%s"' % (id_virloc,host,port,energia_int,energia_ext),'ip="%s",puerto=%s,energia_int="%s",energia_ext="%s"' % (host,port,energia_int,energia_ext))
 			array=paquete[0].split(",")
 			print info
 			# Selecciono el tipo de paquete
