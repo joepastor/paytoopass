@@ -36,8 +36,21 @@ function getEquipos() {
 	$datos = $db->sqlQuery ( "select * from equipos" );
 	$retorna = "";
 	$retorna .= "<table class='report_table'><caption>Cars</caption>";
-	$retorna .= "<tr><th>ID</th><th>Last Report</th><th>Host:Port</th><th>Position</th><th>Driver</th><th>Status</th><th>Msg</th></tr>";
+	$retorna .= "<tr><th>ID</th><th>Last Report</th><th>Host:Port</th><th>Position</th><th>Driver</th><th>Status</th><th>Power</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
+		$img_bat="battery_low.png";
+		if($a->energia_ext>300){
+			$img_bat="battery_mid.png";
+			if($a->energia_ext>400){
+				$img_bat="battery_full.png";
+			}
+		}
+		if($a->energia_ext !=NULL && $a->energia_ext > 400){
+			$energia_ext="AC";
+		}else{
+			$energia_ext="Battery";
+		}
+		
 		$retorna .= "<tr>
 						<td>" . $a->id . "</td><td>" . $a->timestamp . "</td>
 						<td>" . $a->ip . ":" . $a->puerto . "</td>
@@ -48,7 +61,9 @@ function getEquipos() {
 							<a href='posicionesv3.php?id_virloc=" . $a->id . "&route=1'><img src='img/route.png' width='32px' title='Route'></a>
 							" . $a->velocidad . " Kms/h <img style='transform: -moz-transform: rotate(" . $a->rumbo . "deg);
    								-webkit-transform: rotate(" . $a->rumbo . "deg);' title='Heading' src='img/flecha.png' width='16px'>" . $a->rumbo . "&deg;</td>
-						<td>" . $a->chofer . "</td><td>" . $a->estado . "</td>
+						<td>" . $a->chofer . "</td>
+						<td>" . $a->estado . "</td>
+						<td><img src='img/".$img_bat."' width='48px'>" . $energia_ext . "</td>
 						<td><a href='mensaje.php?virloc=$a->id' target='_blank'><img src='img/mail.png' width='32px'></a></td>
 					</tr>";
 	}
