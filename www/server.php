@@ -39,12 +39,13 @@ function getEquipos() {
 	$retorna .= "<tr><th>ID</th><th>Last Report</th><th>Host:Port</th><th>Position</th><th>Driver</th><th>Status</th><th>Power</th><th>Msg</th></tr>";
 	while ( $a = mysql_fetch_object ( $datos ) ) {
 		$img_bat="battery_low.png";
-		if($a->energia_ext>300){
+		if($a->energia_ext>200){
 			$img_bat="battery_mid.png";
 			if($a->energia_ext>400){
 				$img_bat="battery_full.png";
 			}
 		}
+		echo $a->energia_ext;
 		if($a->energia_ext !=NULL && $a->energia_ext > 0){
 			$img_bat="battery_charging.png";
 		}
