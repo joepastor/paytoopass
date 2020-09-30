@@ -1,4 +1,4 @@
-paytoopass
+Paytoopass: The Future Ready Payment Method
 ==========
 
 Paytoo is the emerging car payment method and also the easiest one.
